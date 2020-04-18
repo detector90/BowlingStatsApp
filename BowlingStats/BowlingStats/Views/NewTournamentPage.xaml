@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:converters="clr-namespace:BowlingStats.Utils"
+             mc:Ignorable="d"
+             x:Class="BowlingStats.Views.NewTournamentPage"
+             Title="Nuovo Evento">
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Indietro" Clicked="Cancel_Clicked" />
+        <ToolbarItem Text="Salva" Clicked="Save_Clicked" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:IntEnumConverter x:Key="IntEnum"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <StackLayout Spacing="20" Padding="15">
+            <Label Text="Tipo Torneo" FontSize="Medium" />
+            <Picker Title="Seleziona il tipo torneo"
+                    TitleColor="Red"
+                    ItemsSource="{Binding TournamentTypes}"
+                    SelectedIndex="{Binding Tournament.TournamentType, Converter={StaticResource IntEnum}}"/>
+            <Label Text="Centro bowling" FontSize="Medium" />
+            <Picker Title="Seleziona il centro bowling"
+                    TitleColor="Red"
+                    ItemsSource="{Binding BowlingCenters}"
+                    ItemDisplayBinding="{Binding Resume}"
+                    SelectedItem="{Binding Tournament.BowlingCenter}"
+                    />
+            <Label Text="Handicap" FontSize="Medium" />
+            <Entry Text="{Binding Tournament.Handicap}" Keyboard="Numeric" FontSize="Small" />
+            <Label Text="Descrizione" FontSize="Medium" />
+            <Entry Text="{Binding Tournament.Description}" d:Text="Descrizione torneo" FontSize="Small" />
+            <Label Text="Data" FontSize="Medium" />
+            <DatePicker Date="{Binding Tournament.EventDate}"/>
+            <Label Text="Torneo ufficiale" FontSize="Medium" />
+            <CheckBox IsChecked="{Binding Tournament.IsOfficial}"/>
+        </StackLayout>
+    </ScrollView>
+    
+</ContentPage>
