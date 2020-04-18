@@ -1,0 +1,51 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Views\ItemsPage.xaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Views\ItemsPage.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.2.6" />
+    <PackageReference Include="MR.Gestures" Version="2.1.0" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.5.231" />
+    <PackageReference Include="Xamarin.Forms" Version="4.1.0.555618" />  
+    <PackageReference Include="Xamarin.Essentials" Version="1.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\BowlingCenterDetailPage.xaml.cs">
+      <DependentUpon>BowlingCenterDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\GameDetailPage.xaml.cs">
+      <DependentUpon>GameDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\TournamentDetailPage.xaml.cs">
+      <DependentUpon>TournamentDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\NewTournamentPage.xaml.cs">
+      <DependentUpon>NewTournamentPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\StatisticsPage.xaml.cs">
+      <DependentUpon>StatisticsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\BowlingCentersPage.xaml.cs">
+      <DependentUpon>BowlingCentersPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\TournamentsPage.xaml.cs">
+      <DependentUpon>TournamentsPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+</Project>

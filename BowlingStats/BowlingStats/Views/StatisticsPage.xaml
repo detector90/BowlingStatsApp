@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="BowlingStats.Views.StatisticsPage"
+             Title="{Binding Title}"
+             x:Name="Statistics">
+
+    <!--<ContentPage.ToolbarItems>
+        <ToolbarItem Text="Nuovo evento" Clicked="AddTournament_Clicked" />
+    </ContentPage.ToolbarItems>-->
+
+    <ScrollView>
+        <StackLayout Spacing="20" Padding="15">
+            <!--GLOBALI-->
+            <Label Text="Statistiche Globali" FontSize="Large" FontAttributes="Bold" TextColor="Red"/>
+            <Label Text="Media Scratch" FontSize="Large" FontAttributes="Bold" />
+            <Label Text="{Binding GlobalStatistics.ScratchAverage}" FontSize="Medium"/>
+            <Label Text="Media Handicap" FontSize="Large" FontAttributes="Bold" />
+            <Label Text="{Binding GlobalStatistics.HdpAverage}" FontSize="Medium"/>
+            <Label Text="Numero partite giocate" FontSize="Large" FontAttributes="Bold" />
+            <Label Text="{Binding GlobalStatistics.PlayedGamesNumber}" FontSize="Medium"/>
+            <Label Text="Numero partite sopra i 200" FontSize="Large" FontAttributes="Bold" />
+            <Label Text="{Binding GlobalStatistics.Over2HundredGames}" FontSize="Medium"/>
+            <Label Text="Numero partite sopra i 200 (con Hdp)" FontSize="Large" FontAttributes="Bold" />
+            <Label Text="{Binding GlobalStatistics.Over2HundredGamesHdp}" FontSize="Medium"/>
+            <Label Text="Partita più alta (Scratch)" FontSize="Large" FontAttributes="Bold" />
+            <Label Text="{Binding GlobalStatistics.ScratchHighestGame}" FontSize="Medium"/>
+            <Label Text="Partita più alta (Hdp)" FontSize="Large" FontAttributes="Bold" />
+            <Label Text="{Binding GlobalStatistics.HdpHighestGame}" FontSize="Medium"/>
+
+            <!--EVENTI UFFICIALI-->
+            <Label Text="Statistiche eventi ufficiali" FontSize="Large" FontAttributes="Bold" TextColor="Red"/>
+            <Label Text="Media Scratch" FontSize="Large" FontAttributes="Bold" />
+            <Label Text="{Binding OfficialStatistics.ScratchAverage}" FontSize="Medium"/>
+            <Label Text="Media Handicap" FontSize="Large" FontAttributes="Bold" />
+            <Label Text="{Binding OfficialStatistics.HdpAverage}" FontSize="Medium"/>
+            <Label Text="Numero partite giocate" FontSize="Large" FontAttributes="Bold" />
+            <Label Text="{Binding OfficialStatistics.PlayedGamesNumber}" FontSize="Medium"/>
+            <Label Text="Numero partite sopra i 200" FontSize="Large" FontAttributes="Bold" />
+            <Label Text="{Binding OfficialStatistics.Over2HundredGames}" FontSize="Medium"/>
+            <Label Text="Numero partite sopra i 200 (con Hdp)" FontSize="Large" FontAttributes="Bold" />
+            <Label Text="{Binding OfficialStatistics.Over2HundredGamesHdp}" FontSize="Medium"/>
+            <Label Text="Partita più alta (Scratch)" FontSize="Large" FontAttributes="Bold" />
+            <Label Text="{Binding OfficialStatistics.ScratchHighestGame}" FontSize="Medium"/>
+            <Label Text="Partita più alta (Hdp)" FontSize="Large" FontAttributes="Bold" />
+            <Label Text="{Binding OfficialStatistics.HdpHighestGame}" FontSize="Medium"/>
+
+            <!--EVENTI NON UFFICIALI-->
+            <Label Text="Statistiche eventi non ufficiali" FontSize="Large" FontAttributes="Bold" TextColor="Red"/>
+            <Label Text="Media Scratch" FontSize="Large" FontAttributes="Bold" />
+            <Label Text="{Binding UnofficialStatistics.ScratchAverage}" FontSize="Medium"/>
+            <Label Text="Media Handicap" FontSize="Large" FontAttributes="Bold" />
+            <Label Text="{Binding UnofficialStatistics.HdpAverage}" FontSize="Medium"/>
+            <Label Text="Numero partite giocate" FontSize="Large" FontAttributes="Bold" />
+            <Label Text="{Binding UnofficialStatistics.PlayedGamesNumber}" FontSize="Medium"/>
+            <Label Text="Numero partite sopra i 200" FontSize="Large" FontAttributes="Bold" />
+            <Label Text="{Binding UnofficialStatistics.Over2HundredGames}" FontSize="Medium"/>
+            <Label Text="Numero partite sopra i 200 (con Hdp)" FontSize="Large" FontAttributes="Bold" />
+            <Label Text="{Binding UnofficialStatistics.Over2HundredGamesHdp}" FontSize="Medium"/>
+            <Label Text="Partita più alta (Scratch)" FontSize="Large" FontAttributes="Bold" />
+            <Label Text="{Binding UnofficialStatistics.ScratchHighestGame}" FontSize="Medium"/>
+            <Label Text="Partita più alta (Hdp)" FontSize="Large" FontAttributes="Bold" />
+            <Label Text="{Binding UnofficialStatistics.HdpHighestGame}" FontSize="Medium"/>
+        </StackLayout>
+            
+    </ScrollView>
+    
+</ContentPage>

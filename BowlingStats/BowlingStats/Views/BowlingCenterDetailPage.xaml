@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="BowlingStats.Views.BowlingCenterDetailPage"
+             Title="{Binding Title}">
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Indietro" Clicked="Cancel_Clicked" />
+        <ToolbarItem Text="Salva" Clicked="Save_Clicked" />
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Content>
+        <StackLayout Spacing="20" Padding="15">
+            <Label Text="Città" FontSize="Medium" />
+            <Entry Text="{Binding BowlingCenter.City}" FontSize="Small" />
+            <Label Text="Nome" FontSize="Medium" />
+            <Entry Text="{Binding BowlingCenter.Name}" FontSize="Small" />
+            <Label Text="Indirizzo" FontSize="Medium" />
+            <Entry Text="{Binding BowlingCenter.Address}" FontSize="Small" />
+        </StackLayout>
+    </ContentPage.Content>
+    
+</ContentPage>
