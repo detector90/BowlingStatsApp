@@ -18,7 +18,223 @@
             <Entry Keyboard="Numeric" Text="{Binding Game.GameOrderID}" FontSize="Small" />
             <Label Text="Punteggio finale Scratch" FontSize="Medium" />
             <Entry Keyboard="Numeric" MaxLength="3" Text="{Binding Game.FinalScore}" FontSize="Small" />
+
+            <ScrollView Orientation="Horizontal">
+                <Grid RowSpacing="0" ColumnSpacing="0" Padding="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Frame Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource FrameNumber}">
+                        <Label Text="Frame 1" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                    </Frame>
+                    <Frame Grid.Row="1" Grid.Column="0" Style="{StaticResource FramePoints}">
+                        <Entry Text="{Binding Game.Frames[0].FirstAttempt}" Style="{StaticResource EntryPoints}" />
+                    </Frame>
+                    <Frame Grid.Row="1" Grid.Column="1" Style="{StaticResource FramePoints}">
+                        <Entry Text="{Binding Game.Frames[0].SecondAttempt, Mode=TwoWay}" Style="{StaticResource EntryPoints}" />
+                    </Frame>
+                    <!--<Frame Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource FrameNumber}">
+                        <Label Text="{Binding Game.Frames[0].CurrentScore, Mode=TwoWay}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                    </Frame>-->
+
+                    <Frame Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Style="{StaticResource FrameNumber}">
+                        <Label Text="Frame 2" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+                    </Frame>
+                    <Frame Grid.Row="1" Grid.Column="2" Style="{StaticResource FramePoints}">
+                        <Entry Text="{Binding Game.Frames[1].FirstAttempt}" Style="{StaticResource EntryPoints}" />
+                    </Frame>
+                    <Frame Grid.Row="1" Grid.Column="3" Style="{StaticResource FramePoints}">
+                        <Entry Text="{Binding Game.Frames[1].SecondAttempt}" Style="{StaticResource EntryPoints}" />
+                    </Frame>
+                    <!--<Frame Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Style="{StaticResource FrameNumber}">
+                        <Label Text="{Binding Game.Frames[1].CurrentScore}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                    </Frame>-->
+
+                    <Frame Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2" Style="{StaticResource FrameNumber}">
+                        <Label Text="Frame 3" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                    </Frame>
+                    <Frame Grid.Row="1" Grid.Column="4" Style="{StaticResource FramePoints}">
+                        <Entry Text="{Binding Game.Frames[2].FirstAttempt}" Style="{StaticResource EntryPoints}" />
+                    </Frame>
+                    <Frame Grid.Row="1" Grid.Column="5" Style="{StaticResource FramePoints}">
+                        <Entry Text="{Binding Game.Frames[2].SecondAttempt}" Style="{StaticResource EntryPoints}" />
+                    </Frame>
+                    <!--<Frame Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2" Style="{StaticResource FrameNumber}">
+                        <Label Text="{Binding Game.Frames[2].CurrentScore}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                    </Frame>-->
+
+                    <Frame Grid.Row="0" Grid.Column="6" Grid.ColumnSpan="2" Style="{StaticResource FrameNumber}">
+                        <Label Text="Frame 4" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                    </Frame>
+                    <Frame Grid.Row="1" Grid.Column="6" Style="{StaticResource FramePoints}">
+                        <Entry Text="{Binding Game.Frames[3].FirstAttempt}" Style="{StaticResource EntryPoints}" />
+                    </Frame>
+                    <Frame Grid.Row="1" Grid.Column="7" Style="{StaticResource FramePoints}">
+                        <Entry Text="{Binding Game.Frames[3].SecondAttempt}" Style="{StaticResource EntryPoints}" />
+                    </Frame>
+                    <!--<Frame Grid.Row="2" Grid.Column="6" Grid.ColumnSpan="2" Style="{StaticResource FrameNumber}">
+                        <Label Text="{Binding Game.Frames[3].CurrentScore}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                    </Frame>-->
+
+                    <Frame Grid.Row="0" Grid.Column="8" Grid.ColumnSpan="2" Style="{StaticResource FrameNumber}">
+                        <Label Text="Frame 5" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                    </Frame>
+                    <Frame Grid.Row="1" Grid.Column="8" Style="{StaticResource FramePoints}">
+                        <Entry Text="{Binding Game.Frames[4].FirstAttempt}" Style="{StaticResource EntryPoints}" />
+                    </Frame>
+                    <Frame Grid.Row="1" Grid.Column="9" Style="{StaticResource FramePoints}">
+                        <Entry Text="{Binding Game.Frames[4].SecondAttempt}" Style="{StaticResource EntryPoints}" />
+                    </Frame>
+                    <!--<Frame Grid.Row="2" Grid.Column="8" Grid.ColumnSpan="2" Style="{StaticResource FrameNumber}">
+                        <Label Text="{Binding Game.Frames[4].CurrentScore}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                    </Frame>-->
+
+                    <Frame Grid.Row="0" Grid.Column="10" Grid.ColumnSpan="2" Style="{StaticResource FrameNumber}">
+                        <Label Text="Frame 6" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                    </Frame>
+                    <Frame Grid.Row="1" Grid.Column="10" Style="{StaticResource FramePoints}">
+                        <Entry Text="{Binding Game.Frames[5].FirstAttempt}" Style="{StaticResource EntryPoints}" />
+                    </Frame>
+                    <Frame Grid.Row="1" Grid.Column="11" Style="{StaticResource FramePoints}">
+                        <Entry Text="{Binding Game.Frames[5].SecondAttempt}" Style="{StaticResource EntryPoints}" />
+                    </Frame>
+                    <!--<Frame Grid.Row="2" Grid.Column="10" Grid.ColumnSpan="2" Style="{StaticResource FrameNumber}">
+                        <Label Text="{Binding Game.Frames[5].CurrentScore}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                    </Frame>-->
+
+                    <Frame Grid.Row="0" Grid.Column="12" Grid.ColumnSpan="2" Style="{StaticResource FrameNumber}">
+                        <Label Text="Frame 7" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                    </Frame>
+                    <Frame Grid.Row="1" Grid.Column="12" Style="{StaticResource FramePoints}">
+                        <Entry Text="{Binding Game.Frames[6].FirstAttempt}" Style="{StaticResource EntryPoints}" />
+                    </Frame>
+                    <Frame Grid.Row="1" Grid.Column="13" Style="{StaticResource FramePoints}">
+                        <Entry Text="{Binding Game.Frames[6].SecondAttempt}" Style="{StaticResource EntryPoints}" />
+                    </Frame>
+                    <!--<Frame Grid.Row="2" Grid.Column="12" Grid.ColumnSpan="2" Style="{StaticResource FrameNumber}">
+                        <Label Text="{Binding Game.Frames[6].CurrentScore}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                    </Frame>-->
+
+                    <Frame Grid.Row="0" Grid.Column="14" Grid.ColumnSpan="2" Style="{StaticResource FrameNumber}">
+                        <Label Text="Frame 8" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                    </Frame>
+                    <Frame Grid.Row="1" Grid.Column="14" Style="{StaticResource FramePoints}">
+                        <Entry Text="{Binding Game.Frames[7].FirstAttempt}" Style="{StaticResource EntryPoints}" />
+                    </Frame>
+                    <Frame Grid.Row="1" Grid.Column="15" Style="{StaticResource FramePoints}">
+                        <Entry Text="{Binding Game.Frames[7].SecondAttempt}" Style="{StaticResource EntryPoints}" />
+                    </Frame>
+                    <!--<Frame Grid.Row="2" Grid.Column="14" Grid.ColumnSpan="2" Style="{StaticResource FrameNumber}">
+                        <Label Text="{Binding Game.Frames[7].CurrentScore}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                    </Frame>-->
+
+                    <Frame Grid.Row="0" Grid.Column="16" Grid.ColumnSpan="2" Style="{StaticResource FrameNumber}">
+                        <Label Text="Frame 9" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                    </Frame>
+                    <Frame Grid.Row="1" Grid.Column="16" Style="{StaticResource FramePoints}">
+                        <Entry Text="{Binding Game.Frames[8].FirstAttempt}" Style="{StaticResource EntryPoints}" />
+                    </Frame>
+                    <Frame Grid.Row="1" Grid.Column="17" Style="{StaticResource FramePoints}">
+                        <Entry Text="{Binding Game.Frames[8].SecondAttempt}" Style="{StaticResource EntryPoints}" />
+                    </Frame>
+                    <!--<Frame Grid.Row="2" Grid.Column="16" Grid.ColumnSpan="2" Style="{StaticResource FrameNumber}">
+                        <Label Text="{Binding Game.Frames[8].CurrentScore}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                    </Frame>-->
+
+                    <Frame Grid.Row="0" Grid.Column="20" Grid.ColumnSpan="3" Style="{StaticResource FrameNumber}">
+                        <Label Text="Frame 10" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                    </Frame>
+                    <Frame Grid.Row="1" Grid.Column="20" Style="{StaticResource FramePoints}">
+                        <Entry Text="{Binding Game.Frames[9].FirstAttempt}" Style="{StaticResource EntryPoints}" />
+                    </Frame>
+                    <Frame Grid.Row="1" Grid.Column="21" Style="{StaticResource FramePoints}">
+                        <Entry Text="{Binding Game.Frames[9].SecondAttempt}" Style="{StaticResource EntryPoints}" />
+                    </Frame>
+                    <Frame Grid.Row="1" Grid.Column="22" Style="{StaticResource FramePoints}">
+                        <Entry Text="{Binding Game.Frames[9].ThirdAttempt}" Style="{StaticResource EntryPoints}" />
+                    </Frame>
+                    <!--<Frame Grid.Row="2" Grid.Column="20" Grid.ColumnSpan="3" Style="{StaticResource FrameNumber}">
+                        <Label Text="{Binding Game.Frames[9].CurrentScore}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                    </Frame>-->
+
+                    <!--<Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="Frame 1"/>
+                    <Entry Grid.Row="1" Grid.Column="0" Text="{Binding Game.Frame[0].FirstAttempt}" Keyboard="Numeric"/>
+                    <Entry Grid.Row="1" Grid.Column="1" Text="{Binding Game.Frame[0].SecondAttempt}" Keyboard="Numeric"/>
+
+                    <Label Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Text="Frame 2"/>
+                    <Entry Grid.Row="1" Grid.Column="2" Text="{Binding Game.Frame[1].FirstAttempt}" Keyboard="Numeric"/>
+                    <Entry Grid.Row="1" Grid.Column="3" Text="{Binding Game.Frame[1].SecondAttempt}" Keyboard="Numeric"/>
+
+                    <Label Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2" Text="3"/>
+                    <Entry Grid.Row="1" Grid.Column="4" Text="{Binding Game.Frame[2].FirstAttempt}" Keyboard="Numeric"/>
+                    <Entry Grid.Row="1" Grid.Column="5" Text="{Binding Game.Frame[2].SecondAttempt}" Keyboard="Numeric"/>
+
+                    <Label Grid.Row="0" Grid.Column="6" Grid.ColumnSpan="2" Text="4"/>
+                    <Entry Grid.Row="1" Grid.Column="6" Text="{Binding Game.Frame[3].FirstAttempt}" Keyboard="Numeric"/>
+                    <Entry Grid.Row="1" Grid.Column="7" Text="{Binding Game.Frame[3].SecondAttempt}" Keyboard="Numeric"/>
+
+                    <Label Grid.Row="0" Grid.Column="8" Grid.ColumnSpan="2" Text="5"/>
+                    <Entry Grid.Row="1" Grid.Column="8" Text="{Binding Game.Frame[4].FirstAttempt}" Keyboard="Numeric"/>
+                    <Entry Grid.Row="1" Grid.Column="9" Text="{Binding Game.Frame[4].SecondAttempt}" Keyboard="Numeric"/>
+
+                    <Label Grid.Row="0" Grid.Column="10" Grid.ColumnSpan="2" Text="6"/>
+                    <Entry Grid.Row="1" Grid.Column="10" Text="{Binding Game.Frame[5].FirstAttempt}" Keyboard="Numeric"/>
+                    <Entry Grid.Row="1" Grid.Column="11" Text="{Binding Game.Frame[5].SecondAttempt}" Keyboard="Numeric"/>
+
+                    <Label Grid.Row="0" Grid.Column="12" Grid.ColumnSpan="2" Text="7"/>
+                    <Entry Grid.Row="1" Grid.Column="12" Text="{Binding Game.Frame[6].FirstAttempt}" Keyboard="Numeric"/>
+                    <Entry Grid.Row="1" Grid.Column="13" Text="{Binding Game.Frame[6].SecondAttempt}" Keyboard="Numeric"/>
+
+                    <Label Grid.Row="0" Grid.Column="14" Grid.ColumnSpan="2" Text="8"/>
+                    <Entry Grid.Row="1" Grid.Column="14" Text="{Binding Game.Frame[7].FirstAttempt}" Keyboard="Numeric"/>
+                    <Entry Grid.Row="1" Grid.Column="15" Text="{Binding Game.Frame[7].SecondAttempt}" Keyboard="Numeric"/>
+
+                    <Label Grid.Row="0" Grid.Column="16" Grid.ColumnSpan="2" Text="9"/>
+                    <Entry Grid.Row="1" Grid.Column="16" Text="{Binding Game.Frame[8].FirstAttempt}" Keyboard="Numeric"/>
+                    <Entry Grid.Row="1" Grid.Column="17" Text="{Binding Game.Frame[8].SecondAttempt}" Keyboard="Numeric"/>
+
+                    <Label Grid.Row="0" Grid.Column="18" Grid.ColumnSpan="2" Text="10"/>
+                    <Entry Grid.Row="1" Grid.Column="18" Text="{Binding Game.Frame[9].FirstAttempt}" Keyboard="Numeric"/>
+                    <Entry Grid.Row="1" Grid.Column="19" Text="{Binding Game.Frame[9].SecondAttempt}" Keyboard="Numeric"/>
+                    <Entry Grid.Row="1" Grid.Column="20" Text="{Binding Game.Frame[9].ThirdAttempt}" Keyboard="Numeric"/>
+
+                    <Label Grid.Row="0" Grid.Column="21" Text="Total"/>
+                    <Label Grid.Row="1" Grid.Column="21" Text="{Binding Game.FinalScoreHDP}"/>-->
+                </Grid>
+            </ScrollView>
+
+
+
         </StackLayout>
+
     </ContentPage.Content>
     
 </ContentPage>
