@@ -246,13 +246,49 @@ namespace BowlingStats.Services
 
         public bool SaveTournamentGame(GameModel game, int tournamentId)
         {
-            return App.Database.UpdateGame(new Game()
+            bool result;
+
+            Game gameTodb = new Game()
             {
                 TournamentID = tournamentId,
                 ID = game.ID,
                 GameOrderID = game.GameOrderID,
-                Score = game.FinalScore
-            });
+                Score = game.HasDetails ? game.CalculateScore() : game.FinalScore
+            };
+
+            result = App.Database.UpdateGame(gameTodb);
+
+            if (result)
+            {
+                if (game.HasDetails)
+                    result = SaveGameFrames(gameTodb.ID, game.Frames);
+                else
+                    App.Database.DeleteFrames(gameTodb.ID);
+            }
+
+            return result;
+        }
+
+        public bool SaveGameFrames(int gameID, ObservableCollection<FrameModel> frames)
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                Frame frameToDB = new Frame()
+                {
+                    ID = frames[i].ID,
+                    GameID = gameID,
+                    FrameOrderID = i,
+                    FirstAttempt = frames[i].DbFirstAttempt,
+                    SecondAttempt = frames[i].DbSecondAttempt,
+                    ThirdAttempt = frames[i].DbThirdAttempt,
+                    IsSpare = frames[i].IsSpare,
+                    IsStrike = frames[i].IsStrike
+                };
+
+                App.Database.UpdateFrame(frameToDB);
+            }
+
+            return true;
         }
 
         public bool DeleteTournamentGame(int gameId)
@@ -270,16 +306,93 @@ namespace BowlingStats.Services
 
             foreach (Game dbTournamentGame in App.Database.GetTournamentGames(tournamentId).Result)
             {
+                var gameFrames = GetFrameModels(App.Database.GetGameFrames(dbTournamentGame.ID).Result);
+
                 games.Add(new GameModel
                 {
                     ID = dbTournamentGame.ID,
                     GameOrderID = dbTournamentGame.GameOrderID,
                     FinalScore = dbTournamentGame.Score,
-                    FinalScoreHDP = dbTournamentGame.Score + dbTournament.Handicap <= 300 ? dbTournamentGame.Score + dbTournament.Handicap : 300
+                    FinalScoreHDP = dbTournamentGame.Score + dbTournament.Handicap <= 300 ? dbTournamentGame.Score + dbTournament.Handicap : 300,
+                    Frames = gameFrames,
+                    HasDetails = gameFrames.Count > 0
                 });
             }
 
             return Task.FromResult(games.AsEnumerable());
+        }
+
+        private ObservableCollection<FrameModel> GetFrameModels(List<Frame> dbFrames)
+        {
+            ObservableCollection<FrameModel> frames = new ObservableCollection<FrameModel>();
+
+            if (dbFrames.Count > 0)
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    FrameModel frame = new FrameModel()
+                    {
+                        ID = dbFrames[i].ID,
+                        DbFirstAttempt = dbFrames[i].FirstAttempt,
+                        DbSecondAttempt = dbFrames[i].SecondAttempt,
+                        DbThirdAttempt = dbFrames[i].ThirdAttempt,
+                        IsSpare = dbFrames[i].IsSpare,
+                        IsStrike = dbFrames[i].IsStrike
+                    };
+
+                    if (frame.IsStrike)
+                    {
+                        frame.FirstAttempt = "X";
+
+                        if (i == 9)
+                        {
+                            if (frame.DbSecondAttempt == 10)
+                            {
+                                frame.SecondAttempt = "X";
+
+                                if (frame.DbThirdAttempt == 10)
+                                    frame.ThirdAttempt = "X";
+                                else
+                                    frame.ThirdAttempt = frame.DbThirdAttempt.ToString();
+                            }
+                            else
+                                if (frame.DbSecondAttempt + frame.DbThirdAttempt == 10)
+                                {
+                                    frame.SecondAttempt = frame.DbSecondAttempt.ToString();
+                                    frame.ThirdAttempt = "/";
+                                } else
+                            {
+                                frame.SecondAttempt = frame.DbSecondAttempt.ToString();
+                                frame.ThirdAttempt = frame.DbThirdAttempt.ToString();
+                            }
+                        }
+                            
+                    } else 
+                        if (frame.IsSpare)
+                    {
+                        frame.FirstAttempt = frame.DbFirstAttempt.ToString();
+                        frame.SecondAttempt = "/";
+
+                        if (i == 9)
+                        {
+                            if (frame.DbThirdAttempt == 10)
+                                frame.ThirdAttempt = "X";
+                            else
+                                frame.ThirdAttempt = frame.DbThirdAttempt.ToString();
+                        }
+
+                        
+                    } else
+                    {
+                        frame.FirstAttempt = frame.DbFirstAttempt.ToString();
+                        frame.SecondAttempt = frame.DbSecondAttempt.ToString();
+                    }
+
+                    frames.Add(frame);
+                }
+            }
+
+            return frames;
         }
 
         public Task<IEnumerable<GameModel>> GetAllGames(OfficialFilterEnum filter)

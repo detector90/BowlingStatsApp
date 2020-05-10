@@ -31,7 +31,7 @@ namespace BowlingStats.Utils
 
             string message;
 
-            if (!string.IsNullOrEmpty(message = game.ValidateDetailScore()))
+            if (game.HasDetails && !string.IsNullOrEmpty(message = game.ValidateDetailScore()))
             {
                 return new ValidationResult(message);
             }

@@ -18,6 +18,7 @@ namespace BowlingStats.Utils
             _database.CreateTableAsync<Tournament>().Wait();
             _database.CreateTableAsync<Game>().Wait();
             _database.CreateTableAsync<BowlingCenter>().Wait();
+            _database.CreateTableAsync<Frame>().Wait();
         }
 
         public Task<List<Tournament>> GetTournamentsAsync()
@@ -65,15 +66,13 @@ namespace BowlingStats.Utils
         {
             try
             {
-                var i = 0;
-
                 if (game.ID != 0)
                 {
-                    _database.UpdateAsync(game);
+                    int i = _database.UpdateAsync(game).Result;
                 }
                 else
                 {
-                    _database.InsertAsync(game);
+                    int i = _database.InsertAsync(game).Result;
                 }
             } catch (Exception e)
             {
@@ -85,6 +84,8 @@ namespace BowlingStats.Utils
 
         public Task<int> DeleteGame(int id)
         {
+            _database.Table<Frame>().DeleteAsync(x => x.GameID == id);
+
             return _database.Table<Game>().DeleteAsync(x => x.ID == id);
         }
 
@@ -101,6 +102,39 @@ namespace BowlingStats.Utils
         public Task<List<Game>> GetAllGames()
         {
             return _database.Table<Game>().ToListAsync();
+        }
+
+        public Task<List<Frame>> GetGameFrames(int gameId)
+        {
+            return _database.Table<Frame>().Where(x => x.GameID == gameId).OrderBy(x => x.FrameOrderID).ToListAsync();
+        }
+
+        public bool UpdateFrame(Frame frame)
+        {
+            try
+            {
+                var i = 0;
+
+                if (frame.ID != 0)
+                {
+                    _database.UpdateAsync(frame);
+                }
+                else
+                {
+                    _database.InsertAsync(frame);
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public Task<int> DeleteFrames(int gameId)
+        {
+            return _database.Table<Frame>().DeleteAsync(x => x.GameID == gameId);
         }
 
         #region BowlingCenter

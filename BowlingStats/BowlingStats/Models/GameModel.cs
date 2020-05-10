@@ -12,12 +12,14 @@ namespace BowlingStats.Models
         public int GameOrderID { get; set; }
         public int FinalScore { get; set; }
         public int FinalScoreHDP { get; set; }
+        public bool HasDetails { get; set; }
         public ObservableCollection<FrameModel> Frames { get; set; }
 
         public List<string> allowedChars = new List<string>{ "F", "f", "X", "x", "-", "/" };
 
         public GameModel()
         {
+            HasDetails = false;
             Frames = new ObservableCollection<FrameModel>();
 
             for (int i = 0; i < 10; i++)
@@ -178,17 +180,22 @@ namespace BowlingStats.Models
 
         public string TournamentResume { get; set; }
 
-        internal void CalculateScore()
+        internal int CalculateScore()
         {
             for (int i = 0; i < 10; i++)
             {
                 Frames[i].IsStrike = Frames[i].IsSpare = false;
+                Frames[i].DbFirstAttempt = Frames[i].DbSecondAttempt = Frames[i].DbThirdAttempt = 0;
 
                 if (Frames[i].FirstAttempt.Equals("X") || Frames[i].FirstAttempt.Equals("x"))
+                {
                     Frames[i].IsStrike = true;
+                }
                 else
-                    if (Frames[i].SecondAttempt.Equals("/"))
-                    Frames[i].IsSpare = true;
+                    if (Frames[i].SecondAttempt.Equals("/") || GetFrameScore(i) == 10)
+                    {
+                        Frames[i].IsSpare = true;
+                    }
 
                 if (i > 0)
                     Frames[i].CurrentScore = Frames[i - 1].CurrentScore;
@@ -229,10 +236,38 @@ namespace BowlingStats.Models
                         }
                     }
                 }
+
+                SetFramePoints(i, Frames[i]);
             }
 
-            FinalScore = Frames[9].CurrentScore;
+            return Frames[9].CurrentScore;
+        }
 
+        private void SetFramePoints(int index, FrameModel frame)
+        {
+            frame.DbFirstAttempt = GetAttemptScore(frame.FirstAttempt);
+
+            if (frame.IsStrike)
+            {
+                if (index == 9)
+                {
+                    frame.DbSecondAttempt = GetAttemptScore(frame.SecondAttempt);
+
+                    frame.DbThirdAttempt = GetFrameScore(index) - 10 - frame.DbSecondAttempt;
+                }
+            }
+            else
+                if (frame.IsSpare)
+                {
+                    frame.DbSecondAttempt = 10 - frame.DbFirstAttempt;
+
+                    if (index == 9)
+                    {
+                        frame.DbThirdAttempt = GetAttemptScore(frame.ThirdAttempt);
+                    }
+                }
+            else
+                frame.DbSecondAttempt = GetFrameScore(index) - GetAttemptScore(frame.FirstAttempt);
         }
 
         private int GetFrameScore(int index)

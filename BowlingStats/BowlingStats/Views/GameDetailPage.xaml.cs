@@ -7,6 +7,7 @@ using Xamarin.Forms.Xaml;
 using BowlingStats.Models;
 using System.Linq;
 using BowlingStats.Utils;
+using System.Collections.ObjectModel;
 
 namespace BowlingStats.Views
 {
@@ -61,6 +62,21 @@ namespace BowlingStats.Views
         async void Cancel_Clicked(object sender, EventArgs e)
         {
             await Navigation.PopModalAsync();
+        }
+
+        private void HasDetail_CheckedChanged(object sender, CheckedChangedEventArgs e)
+        {
+            CheckBox cbHasDetail = (CheckBox)sender;
+
+            if (cbHasDetail.IsChecked && Game.Frames.Count == 0)
+            {
+                Game.Frames = new ObservableCollection<FrameModel>();
+
+                for (int i = 0; i < 10; i++)
+                {
+                    Game.Frames.Add(new FrameModel());
+                }
+            }
         }
     }
 }

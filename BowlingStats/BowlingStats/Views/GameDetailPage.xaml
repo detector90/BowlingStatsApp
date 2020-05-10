@@ -17,9 +17,11 @@
             <Label Text="Progressivo partita" FontSize="Medium" />
             <Entry Keyboard="Numeric" Text="{Binding Game.GameOrderID}" FontSize="Small" />
             <Label Text="Punteggio finale Scratch" FontSize="Medium" />
-            <Entry Keyboard="Numeric" MaxLength="3" Text="{Binding Game.FinalScore}" FontSize="Small" />
+            <Entry Keyboard="Numeric" MaxLength="3" Text="{Binding Game.FinalScore}" FontSize="Small" IsReadOnly="{Binding Source={x:Reference Name=HasDetail}, Path=IsChecked}" />
+            <Label Text="Dettaglio frame" FontSize="Medium" />
+            <CheckBox x:Name="HasDetail" IsChecked="{Binding Game.HasDetails, Mode=TwoWay}" CheckedChanged="HasDetail_CheckedChanged"/>
 
-            <ScrollView Orientation="Horizontal">
+            <ScrollView IsVisible="{Binding Source={x:Reference Name=HasDetail}, Path=IsChecked}" x:Name="GameDetail" Orientation="Horizontal" Margin="0,40,0,0">
                 <Grid RowSpacing="0" ColumnSpacing="0" Padding="0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
