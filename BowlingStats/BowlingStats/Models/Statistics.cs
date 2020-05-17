@@ -13,5 +13,8 @@ namespace BowlingStats.Models
         public int Over2HundredGamesHdp { get; set; }
         public string ScratchHighestGame { get; set; }
         public string HdpHighestGame { get; set; }
+        public double StrikePercentage { get; set; }
+        public double SparePercentage { get; set; }
+        public double SpareConversionPercentage { get; set; }
     }
 }

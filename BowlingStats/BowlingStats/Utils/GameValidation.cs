@@ -29,6 +29,13 @@ namespace BowlingStats.Utils
                 return new ValidationResult("Attenzione, il punteggio della partita deve essere compreso tra 0 e 300!");
             }
 
+            string message;
+
+            if (game.HasDetails && !string.IsNullOrEmpty(message = game.ValidateDetailScore()))
+            {
+                return new ValidationResult(message);
+            }
+
             return new ValidationResult(string.Empty);
         }
     }

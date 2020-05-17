@@ -30,6 +30,12 @@
             <Label Text="{Binding GlobalStatistics.ScratchHighestGame}" FontSize="Medium"/>
             <Label Text="Partita più alta (Hdp)" FontSize="Large" FontAttributes="Bold" />
             <Label Text="{Binding GlobalStatistics.HdpHighestGame}" FontSize="Medium"/>
+            <Label Text="Percentuale strike" FontSize="Large" FontAttributes="Bold" />
+            <Label Text="{Binding GlobalStatistics.StrikePercentage}" FontSize="Medium"/>
+            <Label Text="Percentuale spare" FontSize="Large" FontAttributes="Bold" />
+            <Label Text="{Binding GlobalStatistics.SparePercentage}" FontSize="Medium"/>
+            <Label Text="Percentuale conversione spare" FontSize="Large" FontAttributes="Bold" />
+            <Label Text="{Binding GlobalStatistics.SpareConversionPercentage}" FontSize="Medium"/>
 
             <!--EVENTI UFFICIALI-->
             <Label Text="Statistiche eventi ufficiali" FontSize="Large" FontAttributes="Bold" TextColor="Red"/>
@@ -47,6 +53,12 @@
             <Label Text="{Binding OfficialStatistics.ScratchHighestGame}" FontSize="Medium"/>
             <Label Text="Partita più alta (Hdp)" FontSize="Large" FontAttributes="Bold" />
             <Label Text="{Binding OfficialStatistics.HdpHighestGame}" FontSize="Medium"/>
+            <Label Text="Percentuale strike" FontSize="Large" FontAttributes="Bold" />
+            <Label Text="{Binding OfficialStatistics.StrikePercentage}" FontSize="Medium"/>
+            <Label Text="Percentuale spare" FontSize="Large" FontAttributes="Bold" />
+            <Label Text="{Binding OfficialStatistics.SparePercentage}" FontSize="Medium"/>
+            <Label Text="Percentuale conversione spare" FontSize="Large" FontAttributes="Bold" />
+            <Label Text="{Binding OfficialStatistics.SpareConversionPercentage}" FontSize="Medium"/>
 
             <!--EVENTI NON UFFICIALI-->
             <Label Text="Statistiche eventi non ufficiali" FontSize="Large" FontAttributes="Bold" TextColor="Red"/>
@@ -64,6 +76,12 @@
             <Label Text="{Binding UnofficialStatistics.ScratchHighestGame}" FontSize="Medium"/>
             <Label Text="Partita più alta (Hdp)" FontSize="Large" FontAttributes="Bold" />
             <Label Text="{Binding UnofficialStatistics.HdpHighestGame}" FontSize="Medium"/>
+            <Label Text="Percentuale strike" FontSize="Large" FontAttributes="Bold" />
+            <Label Text="{Binding UnofficialStatistics.StrikePercentage}" FontSize="Medium"/>
+            <Label Text="Percentuale spare" FontSize="Large" FontAttributes="Bold" />
+            <Label Text="{Binding UnofficialStatistics.SparePercentage}" FontSize="Medium"/>
+            <Label Text="Percentuale conversione spare" FontSize="Large" FontAttributes="Bold" />
+            <Label Text="{Binding UnofficialStatistics.SpareConversionPercentage}" FontSize="Medium"/>
         </StackLayout>
             
     </ScrollView>
