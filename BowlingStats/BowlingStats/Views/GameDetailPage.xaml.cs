@@ -19,6 +19,7 @@ namespace BowlingStats.Views
         public GameModel Game { get; set; }
         public string Title { get; set; }
         private int TournamentID { get; set; }
+        public Command ButtonClickedCommand { get; set; }
 
         public GameDetailPage(int tournamentID)
         {
@@ -30,6 +31,16 @@ namespace BowlingStats.Views
 
             Title = "Nuova partita";
             TournamentID = tournamentID;
+
+            ButtonClickedCommand = new Command<string>(
+            execute: (string arg) =>
+            {
+                SetPinButtonsVisibility(Int32.Parse(arg));
+            },
+            canExecute: (string arg) =>
+            {
+                return true;
+            });
 
             BindingContext = this;
         }
@@ -57,6 +68,19 @@ namespace BowlingStats.Views
 
             MessagingCenter.Send(this, "SaveGame", Game);
             await Navigation.PopModalAsync();
+        }
+
+        private void SetPinButtonsVisibility(int remainingPins)
+        {
+            for (int i = 0; i < 11; i++)
+            {
+                Button button = (Button)PinButtons.FindByName("Button" + i.ToString());
+
+                if (i <= remainingPins)
+                    button.IsVisible = true;
+                else
+                    button.IsVisible = false;
+            }
         }
 
         async void Cancel_Clicked(object sender, EventArgs e)
