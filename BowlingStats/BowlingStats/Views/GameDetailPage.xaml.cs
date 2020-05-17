@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 using BowlingStats.Models;
-using System.Linq;
 using BowlingStats.Utils;
 using System.Collections.ObjectModel;
+using BowlingStats.ViewModels;
 
 namespace BowlingStats.Views
 {
@@ -16,23 +14,15 @@ namespace BowlingStats.Views
     [DesignTimeVisible(false)]
     public partial class GameDetailPage : ContentPage
     {
-        public GameModel Game { get; set; }
-        public string Title { get; set; }
-        private int TournamentID { get; set; }
-        public Command ButtonClickedCommand { get; set; }
+        public GameDetailViewModel viewModel;
 
         public GameDetailPage(int tournamentID)
         {
             InitializeComponent();
 
-            Game = new GameModel();
+            viewModel = new GameDetailViewModel(tournamentID);
 
-            Game.GameOrderID = BusinessLogic.ProposedGameOrderID(tournamentID);
-
-            Title = "Nuova partita";
-            TournamentID = tournamentID;
-
-            ButtonClickedCommand = new Command<string>(
+            viewModel.ButtonClickedCommand = new Command<string>(
             execute: (string arg) =>
             {
                 SetPinButtonsVisibility(Int32.Parse(arg));
@@ -42,23 +32,32 @@ namespace BowlingStats.Views
                 return true;
             });
 
-            BindingContext = this;
+            BindingContext = viewModel;
         }
 
         public GameDetailPage(GameModel game, int tournamentID)
         {
             InitializeComponent();
 
-            Game = game;
-            Title = "Dettaglio partita";
-            TournamentID = tournamentID;
+            GameModel Game = game;
+            viewModel = new GameDetailViewModel(game, tournamentID);
 
-            BindingContext = this;
+            viewModel.ButtonClickedCommand = new Command<string>(
+            execute: (string arg) =>
+            {
+                SetPinButtonsVisibility(Int32.Parse(arg));
+            },
+            canExecute: (string arg) =>
+            {
+                return true;
+            });
+
+            BindingContext = viewModel;
         }
 
         async void Save_Clicked(object sender, EventArgs e)
         {
-            string errorMessage = GameValidation.Validate(Game, TournamentID).ErrorMessage;
+            string errorMessage = GameValidation.Validate(viewModel.Game, viewModel.TournamentID).ErrorMessage;
 
             if (!string.IsNullOrEmpty(errorMessage))
             {
@@ -66,7 +65,7 @@ namespace BowlingStats.Views
                 return;
             }
 
-            MessagingCenter.Send(this, "SaveGame", Game);
+            MessagingCenter.Send(this, "SaveGame", viewModel.Game);
             await Navigation.PopModalAsync();
         }
 
@@ -92,13 +91,13 @@ namespace BowlingStats.Views
         {
             CheckBox cbHasDetail = (CheckBox)sender;
 
-            if (cbHasDetail.IsChecked && Game.Frames.Count == 0)
+            if (cbHasDetail.IsChecked && viewModel.Game.Frames.Count == 0)
             {
-                Game.Frames = new ObservableCollection<FrameModel>();
+                viewModel.Game.Frames = new ObservableCollection<FrameModel>();
 
                 for (int i = 0; i < 10; i++)
                 {
-                    Game.Frames.Add(new FrameModel());
+                    viewModel.Game.Frames.Add(new FrameModel());
                 }
             }
         }
