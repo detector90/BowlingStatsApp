@@ -15,6 +15,7 @@ namespace BowlingStats.ViewModels
         public StatisticsViewModel()
         {
             IEnumerable<GameModel> gameModels = DataStore.GetAllGames(Enums.OfficialFilterEnum.All).Result;
+            IEnumerable<FrameModel> frameModels = DataStore.GetAllFrames(Enums.OfficialFilterEnum.All).Result;
             GlobalStatistics = new Statistics();
             OfficialStatistics = new Statistics();
             UnofficialStatistics = new Statistics();
@@ -23,6 +24,10 @@ namespace BowlingStats.ViewModels
             GameModel highestGame;
             int maxHdpGame;
             GameModel highestHdpGame;
+
+            int strikesCount;
+            int sparesCount;
+            int framesCount;
 
             if (gameModels.Count() > 0)
             {
@@ -41,9 +46,19 @@ namespace BowlingStats.ViewModels
                 highestHdpGame = gameModels.Where(x => x.FinalScoreHDP == maxHdpGame).First();
 
                 GlobalStatistics.HdpHighestGame = string.Concat(highestHdpGame.FinalScoreHDP, " (", highestHdpGame.TournamentResume, ")");
+
+                // Frames Statistics
+                strikesCount = frameModels.Count(x => x.IsStrike);
+                sparesCount = frameModels.Count(x => x.IsSpare);
+                framesCount = frameModels.Count();
+
+                GlobalStatistics.StrikePercentage = Math.Round((double)strikesCount / framesCount * 100, 2);
+                GlobalStatistics.SparePercentage = Math.Round((double)sparesCount / framesCount * 100, 2);
+                GlobalStatistics.SpareConversionPercentage = Math.Round((double)sparesCount / (framesCount - strikesCount) * 100, 2);
             }
 
             gameModels = DataStore.GetAllGames(Enums.OfficialFilterEnum.OnlyOfficial).Result;
+            frameModels = DataStore.GetAllFrames(Enums.OfficialFilterEnum.OnlyOfficial).Result;
 
             if (gameModels.Count() > 0)
             {
@@ -62,9 +77,19 @@ namespace BowlingStats.ViewModels
                 highestHdpGame = gameModels.Where(x => x.FinalScoreHDP == maxHdpGame).First();
 
                 OfficialStatistics.HdpHighestGame = string.Concat(highestHdpGame.FinalScoreHDP, " (", highestHdpGame.TournamentResume, ")");
+
+                // Frames Statistics
+                strikesCount = frameModels.Count(x => x.IsStrike);
+                sparesCount = frameModels.Count(x => x.IsSpare);
+                framesCount = frameModels.Count();
+
+                OfficialStatistics.StrikePercentage = Math.Round((double)strikesCount / framesCount * 100, 2);
+                OfficialStatistics.SparePercentage = Math.Round((double)sparesCount / framesCount * 100, 2);
+                OfficialStatistics.SpareConversionPercentage = Math.Round((double)sparesCount / (framesCount - strikesCount) * 100, 2);
             }
 
             gameModels = DataStore.GetAllGames(Enums.OfficialFilterEnum.OnlyUnofficial).Result;
+            frameModels = DataStore.GetAllFrames(Enums.OfficialFilterEnum.OnlyUnofficial).Result;
 
             if (gameModels.Count() > 0)
             {
@@ -83,10 +108,16 @@ namespace BowlingStats.ViewModels
                 highestHdpGame = gameModels.Where(x => x.FinalScoreHDP == maxHdpGame).First();
 
                 UnofficialStatistics.HdpHighestGame = string.Concat(highestHdpGame.FinalScoreHDP, " (", highestHdpGame.TournamentResume, ")");
+
+                // Frames Statistics
+                strikesCount = frameModels.Count(x => x.IsStrike);
+                sparesCount = frameModels.Count(x => x.IsSpare);
+                framesCount = frameModels.Count();
+
+                UnofficialStatistics.StrikePercentage = Math.Round((double)strikesCount / framesCount * 100, 2);
+                UnofficialStatistics.SparePercentage = Math.Round((double)sparesCount / framesCount * 100, 2);
+                UnofficialStatistics.SpareConversionPercentage = Math.Round((double)sparesCount / (framesCount - strikesCount) * 100, 2);
             }
-
-
-
         }
     }
 }

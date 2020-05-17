@@ -12,7 +12,7 @@ namespace BowlingStats.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<TournamentModel,GameModel,BowlingCenterModel> DataStore => DependencyService.Get<IDataStore<TournamentModel,GameModel,BowlingCenterModel>>() ?? new TournamentDataStore();
+        public IDataStore<TournamentModel,GameModel,BowlingCenterModel,FrameModel> DataStore => DependencyService.Get<IDataStore<TournamentModel,GameModel,BowlingCenterModel,FrameModel>>() ?? new TournamentDataStore();
 
         bool isBusy = false;
         public bool IsBusy

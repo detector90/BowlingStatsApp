@@ -9,11 +9,12 @@ using BowlingStats.Models;
 
 namespace BowlingStats.Services
 {
-    public class TournamentDataStore : IDataStore<TournamentModel, GameModel, BowlingCenterModel>
+    public class TournamentDataStore : IDataStore<TournamentModel, GameModel, BowlingCenterModel, FrameModel>
     {
         List<TournamentModel> tournaments;
         List<GameModel> games;
         List<BowlingCenterModel> bowlingCenters;
+        List<FrameModel> frames;
 
         public TournamentDataStore()
         {
@@ -417,6 +418,42 @@ namespace BowlingStats.Services
                 }
             }
             return Task.FromResult(games.AsEnumerable());
+        }
+
+        public Task<IEnumerable<FrameModel>> GetAllFrames(OfficialFilterEnum filter)
+        {
+            frames = new List<FrameModel>();
+
+            foreach (Game dbGame in App.Database.GetAllGames().Result)
+            {
+                Tournament tournament = App.Database.GetTournamentAsync(dbGame.TournamentID).Result;
+                BowlingCenter bowlingCenter = tournament.BowlingCenterID != 0 ? App.Database.GetBowlingCenterAsync(tournament.BowlingCenterID).Result : null;
+
+                if (filter == OfficialFilterEnum.All || (filter == OfficialFilterEnum.OnlyOfficial && tournament.IsOfficial) || (filter == OfficialFilterEnum.OnlyUnofficial && !tournament.IsOfficial))
+                {
+                    var framesToAdd = App.Database.GetGameFrames(dbGame.ID).Result;
+
+                    framesToAdd.ForEach(x => frames.Add(new FrameModel()
+                    {
+                        ID = x.ID,
+                        DbFirstAttempt = x.FirstAttempt,
+                        DbSecondAttempt = x.SecondAttempt,
+                        DbThirdAttempt = x.ThirdAttempt,
+                        IsSpare = x.IsSpare,
+                        IsStrike = x.IsStrike
+                    }));
+
+                    //games.Add(new GameModel()
+                    //{
+                    //    ID = dbGame.ID,
+                    //    TournamentResume = bowlingCenter != null ? string.Concat(bowlingCenter.City, " - ", tournament.EventDate.ToString("dd/MM/yyyy")) : tournament.EventDate.ToString("dd/MM/yyyy"),
+                    //    GameOrderID = dbGame.GameOrderID,
+                    //    FinalScore = dbGame.Score,
+                    //    FinalScoreHDP = dbGame.Score + tournament.Handicap <= 300 ? dbGame.Score + tournament.Handicap : 300
+                    //});
+                }
+            }
+            return Task.FromResult(frames.AsEnumerable());
         }
 
         public async Task<bool> AddBowlingCenterAsync(BowlingCenterModel item)

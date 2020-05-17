@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace BowlingStats.Services
 {
-    public interface IDataStore<T,Q,Y>
+    public interface IDataStore<T,Q,Y,F>
     {
         Task<bool> AddTournamentAsync(T item);
         Task<bool> UpdateTournamentAsync(T item, ICollection<Q> games);
@@ -20,6 +20,7 @@ namespace BowlingStats.Services
 
         #region Statistics
         Task<IEnumerable<Q>> GetAllGames(OfficialFilterEnum filter);
+        Task<IEnumerable<F>> GetAllFrames(OfficialFilterEnum filter);
         //Task<IEnumerable<Q>> GetAllGames();
         #endregion
 

@@ -104,6 +104,12 @@ namespace BowlingStats.Utils
             return _database.Table<Game>().ToListAsync();
         }
 
+        public Task<List<Frame>> GetAllFrames()
+        {
+            //return _database.Table<Frame>().Where(x => x.GameID != 0).ToListAsync();
+            return _database.Table<Frame>().ToListAsync();
+        }
+
         public Task<List<Frame>> GetGameFrames(int gameId)
         {
             return _database.Table<Frame>().Where(x => x.GameID == gameId).OrderBy(x => x.FrameOrderID).ToListAsync();
