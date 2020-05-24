@@ -18,6 +18,20 @@ namespace BowlingStats.Models
         public bool IsSpare { get; set; }
         public bool IsSplit { get; set; }
         public int CurrentScore { get; set; }
-
+        public bool FirstAttemptSelected { get; set; }
+        public bool SecondAttemptSelected { get; set; }
+        public bool ThirdAttemptSelected { get; set; }
+        public Color FirstAttemptColor
+        {
+            get { return FirstAttemptSelected ? Color.Yellow : Color.White; }
+        }
+        public Color SecondAttemptColor
+        {
+            get { return SecondAttemptSelected ? Color.Yellow : Color.White; }
+        }
+        public Color ThirdAttemptColor
+        {
+            get { return ThirdAttemptSelected ? Color.Yellow : Color.White; }
+        }
     }
 }

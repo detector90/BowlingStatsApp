@@ -25,7 +25,22 @@ namespace BowlingStats.Views
             viewModel.ButtonClickedCommand = new Command<string>(
             execute: (string arg) =>
             {
-                SetPinButtonsVisibility(Int32.Parse(arg));
+                int pins = viewModel.SetFramePointAndReturnRemainingPins(arg);
+                SetPinButtonsVisibility(pins);
+            },
+            canExecute: (string arg) =>
+            {
+                return true;
+            });
+
+            viewModel.FrameSelectedCommand = new Command<string>(
+            execute: (string arg) =>
+            {
+                SetPinButtonsVisibility(10);
+                viewModel.SetSelected(false);
+                viewModel.CurrentFrame = Int32.Parse(arg);
+                viewModel.CurrentAttempt = 1;
+                viewModel.SetSelected(true, viewModel.CurrentFrame);
             },
             canExecute: (string arg) =>
             {
@@ -45,7 +60,22 @@ namespace BowlingStats.Views
             viewModel.ButtonClickedCommand = new Command<string>(
             execute: (string arg) =>
             {
-                SetPinButtonsVisibility(Int32.Parse(arg));
+                int pins = viewModel.SetFramePointAndReturnRemainingPins(arg);
+                SetPinButtonsVisibility(pins);
+            },
+            canExecute: (string arg) =>
+            {
+                return true;
+            });
+
+            viewModel.FrameSelectedCommand = new Command<string>(
+            execute: (string arg) =>
+            {
+                SetPinButtonsVisibility(10);
+                viewModel.SetSelected(false);
+                viewModel.CurrentFrame = Int32.Parse(arg);
+                viewModel.CurrentAttempt = 1;
+                viewModel.SetSelected(true, viewModel.CurrentFrame);
             },
             canExecute: (string arg) =>
             {
@@ -85,21 +115,6 @@ namespace BowlingStats.Views
         async void Cancel_Clicked(object sender, EventArgs e)
         {
             await Navigation.PopModalAsync();
-        }
-
-        private void HasDetail_CheckedChanged(object sender, CheckedChangedEventArgs e)
-        {
-            CheckBox cbHasDetail = (CheckBox)sender;
-
-            if (cbHasDetail.IsChecked && viewModel.Game.Frames.Count == 0)
-            {
-                viewModel.Game.Frames = new ObservableCollection<FrameModel>();
-
-                for (int i = 0; i < 10; i++)
-                {
-                    viewModel.Game.Frames.Add(new FrameModel());
-                }
-            }
         }
     }
 }

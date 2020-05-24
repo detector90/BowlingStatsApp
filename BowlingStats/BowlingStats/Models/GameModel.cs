@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xamarin.Forms;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace BowlingStats.Models
 {
@@ -19,7 +20,7 @@ namespace BowlingStats.Models
 
         public GameModel()
         {
-            HasDetails = false;
+            HasDetails = true;
             Frames = new ObservableCollection<FrameModel>();
 
             for (int i = 0; i < 10; i++)
