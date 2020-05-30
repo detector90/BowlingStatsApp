@@ -20,10 +20,10 @@ namespace BowlingStats.Views
 
             menuItems = new List<HomeMenuItem>
             {
-                new HomeMenuItem {Id = MenuItemType.EventsList, Title="Elenco eventi" },
-                new HomeMenuItem {Id = MenuItemType.Statistics, Title="Statistiche" },
-                new HomeMenuItem {Id = MenuItemType.BowlingCenters, Title="Centri bowling" },
-                new HomeMenuItem {Id = MenuItemType.Filters, Title="Filtri" }
+                new HomeMenuItem {Id = MenuItemType.EventsList, Title="Elenco eventi", Image="Events_icon.png" },
+                new HomeMenuItem {Id = MenuItemType.Statistics, Title="Statistiche", Image="Statistics_icon.png" },
+                new HomeMenuItem {Id = MenuItemType.BowlingCenters, Title="Centri bowling", Image="BowlingCenters_icon.png" },
+                new HomeMenuItem {Id = MenuItemType.Filters, Title="Filtri", Image="Filter_icon.png" }
             };
 
             ListViewMenu.ItemsSource = menuItems;
