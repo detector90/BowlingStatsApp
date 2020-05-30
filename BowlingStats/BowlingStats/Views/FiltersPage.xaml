@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="BowlingStats.Views.FiltersPage"
+             Title="{Binding Title}"
+             x:Name="Filter">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Reset" Clicked="Reset_Clicked" />
+        <ToolbarItem Text="Conferma" Clicked="Save_Clicked" />
+    </ContentPage.ToolbarItems>
+
+    <ScrollView>
+        <StackLayout Spacing="20" Padding="15">
+            <!--<Label Text="Tipo Torneo" FontSize="Medium" />-->
+            <!--<Picker Title="Seleziona il tipo torneo"
+                    TitleColor="Red"
+                    ItemsSource="{Binding TournamentTypes}"
+                    SelectedIndex="{Binding Tournament.TournamentType, Converter={StaticResource IntEnum}}"/>-->
+            <Label Text="Centro bowling" FontSize="Medium" />
+            <Picker x:Name="BowlingCenterPicker" Title="Seleziona il centro bowling"
+                    TitleColor="Red"
+                    ItemsSource="{Binding BowlingCenters}"
+                    ItemDisplayBinding="{Binding Resume}"
+                    SelectedItem="{Binding Filters.BowlingCenter}"
+                    />
+            <Label Text="Data inizio" FontSize="Medium" />
+            <DatePicker Date="{Binding Filters.DateFrom}"/>
+            <Label Text="Data fine" FontSize="Medium" />
+            <DatePicker Date="{Binding Filters.DateTo}"/>
+        </StackLayout>
+            
+    </ScrollView>
+    
+</ContentPage>

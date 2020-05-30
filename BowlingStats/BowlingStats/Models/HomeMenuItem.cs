@@ -8,7 +8,8 @@ namespace BowlingStats.Models
     {
         EventsList,
         Statistics,
-        BowlingCenters
+        BowlingCenters,
+        Filters
     }
     public class HomeMenuItem
     {

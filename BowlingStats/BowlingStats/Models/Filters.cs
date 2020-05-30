@@ -6,8 +6,8 @@ namespace BowlingStats.Models
 {
     public class Filters
     {
-        public DateTime DateFrom;
-        public DateTime DateTo;
-        public int BowlingID;
+        public DateTime DateFrom { get; set; }
+        public DateTime DateTo { get; set; }
+        public BowlingCenterModel BowlingCenter { get; set; }
     }
 }

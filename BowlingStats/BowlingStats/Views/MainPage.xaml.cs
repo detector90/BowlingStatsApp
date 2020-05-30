@@ -39,6 +39,9 @@ namespace BowlingStats.Views
                     case (int)MenuItemType.BowlingCenters:
                         MenuPages.Add(id, new NavigationPage(new BowlingCentersPage()));
                         break;
+                    case (int)MenuItemType.Filters:
+                        MenuPages.Add(id, new NavigationPage(new FiltersPage()));
+                        break;
                 }
             }
 

@@ -32,6 +32,9 @@
     <Compile Update="Views\GameDetailPage.xaml.cs">
       <DependentUpon>GameDetailPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\FiltersPage.xaml.cs">
+      <DependentUpon>FiltersPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\TournamentDetailPage.xaml.cs">
       <DependentUpon>TournamentDetailPage.xaml</DependentUpon>
     </Compile>

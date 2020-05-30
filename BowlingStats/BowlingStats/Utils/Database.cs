@@ -24,11 +24,10 @@ namespace BowlingStats.Utils
 
         public Task<List<Tournament>> GetTournamentsAsync(Filters globalFilter)
         {
-            var tournaments = _database.Table<Tournament>().Where(x => x.EventDate < globalFilter.DateTo && x.EventDate > globalFilter.DateFrom);
+            var tournaments = _database.Table<Tournament>().Where(x => x.EventDate <= globalFilter.DateTo && x.EventDate >= globalFilter.DateFrom);
 
-            if (globalFilter.BowlingID != 0)
-                tournaments = tournaments.Where(x => x.BowlingCenterID == globalFilter.BowlingID);
-                
+            if (globalFilter.BowlingCenter != null)
+                tournaments = tournaments.Where(x => x.BowlingCenterID == globalFilter.BowlingCenter.ID);
                 
             return tournaments.OrderByDescending(x => x.EventDate).ToListAsync();
         }

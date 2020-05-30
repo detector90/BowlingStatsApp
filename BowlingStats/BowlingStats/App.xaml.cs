@@ -32,13 +32,18 @@ namespace BowlingStats
             InitializeComponent();
 
             DependencyService.Register<TournamentDataStore>();
+            ResetFilters();
+            MainPage = new MainPage();
+        }
+
+        public static void ResetFilters()
+        {
             Filter = new Filters()
             {
-                BowlingID = 0,
+                BowlingCenter = null,
                 DateFrom = new DateTime(DateTime.Now.Year, 1, 1),
                 DateTo = new DateTime(DateTime.Now.Year, 12, 31)
             };
-            MainPage = new MainPage();
         }
 
         protected override void OnStart()
