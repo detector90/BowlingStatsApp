@@ -6,6 +6,7 @@ using Xamarin.Forms.Xaml;
 using BowlingStats.Models;
 using BowlingStats.ViewModels;
 using System.Linq;
+using BowlingStats.Utils;
 
 namespace BowlingStats.Views
 {
@@ -22,9 +23,7 @@ namespace BowlingStats.Views
             BindingContext = this.viewModel = viewModel;
 
             var selectedBowling = viewModel.Tournament.BowlingCenter != null ? viewModel.BowlingCenters.Where(x => x.ID == viewModel.Tournament.BowlingCenter.ID).FirstOrDefault() : null;
-            //BowlingCentersList.Items[0].Select(); //.SelectedIndex = selectedBowling != null ? viewModel.BowlingCenters.IndexOf(selectedBowling) : 0;
             BowlingCentersList.SelectedIndex = viewModel.BowlingCenters.FindIndex(x => x.ID == selectedBowling.ID);
-            //BowlingCentersList.SelectedItem = selectedBowling;
         }
 
         public TournamentDetailPage()
@@ -46,6 +45,14 @@ namespace BowlingStats.Views
 
         async void Save_Clicked(object sender, EventArgs e)
         {
+            string errorMessage = DataValidator.Validate(viewModel.Tournament).ErrorMessage;
+
+            if (!string.IsNullOrEmpty(errorMessage))
+            {
+                await DisplayAlert("Errore", errorMessage, "OK");
+                return;
+            }
+
             MessagingCenter.Send(this, "SaveTournament", viewModel.Tournament);
             await Navigation.PopAsync();
         }
