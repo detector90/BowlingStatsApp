@@ -14,6 +14,8 @@ namespace BowlingStats.ViewModels
 
         public StatisticsViewModel()
         {
+            Title = "Statistiche";
+
             IEnumerable<GameModel> gameModels = DataStore.GetAllGames(Enums.OfficialFilterEnum.All).Result;
             IEnumerable<FrameModel> frameModels = DataStore.GetAllFrames(Enums.OfficialFilterEnum.All).Result;
             GlobalStatistics = new Statistics();
