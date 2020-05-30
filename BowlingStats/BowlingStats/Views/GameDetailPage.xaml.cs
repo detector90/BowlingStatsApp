@@ -87,7 +87,7 @@ namespace BowlingStats.Views
 
         async void Save_Clicked(object sender, EventArgs e)
         {
-            string errorMessage = GameValidation.Validate(viewModel.Game, viewModel.TournamentID).ErrorMessage;
+            string errorMessage = DataValidator.Validate(viewModel.Game, viewModel.TournamentID).ErrorMessage;
 
             if (!string.IsNullOrEmpty(errorMessage))
             {

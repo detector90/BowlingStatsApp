@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace BowlingStats.Utils
 {
-    public static class GameValidation
+    public static class DataValidator
     {
         public static ValidationResult Validate(GameModel game, int tournamentID)
         {
@@ -32,6 +32,36 @@ namespace BowlingStats.Utils
             if (!string.IsNullOrEmpty(message = game.ValidateDetailScore()))
             {
                 return new ValidationResult(message);
+            }
+
+            return new ValidationResult(string.Empty);
+        }
+
+        public static ValidationResult Validate(TournamentModel tournament)
+        {
+            if (tournament.BowlingCenter == null)
+            {
+                return new ValidationResult("Attenzione, seleziona un centro bowling. Se non il centro non è presente nella lista, inseriscilo nell'anagrafica corrispondente!");
+            }
+
+            if (string.IsNullOrEmpty(tournament.Description))
+            {
+                return new ValidationResult("Attenzione, inserisci una descrizione del torneo!");
+            }
+
+            return new ValidationResult(string.Empty);
+        }
+
+        public static ValidationResult Validate(BowlingCenterModel bowlingCenter)
+        {
+            if (string.IsNullOrEmpty(bowlingCenter.City))
+            {
+                return new ValidationResult("Attenzione, inserisci la città del centro bowling!");
+            }
+
+            if (string.IsNullOrEmpty(bowlingCenter.Name))
+            {
+                return new ValidationResult("Attenzione, inserisci il nome del centro bowling!");
             }
 
             return new ValidationResult(string.Empty);

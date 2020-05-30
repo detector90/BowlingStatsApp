@@ -41,6 +41,14 @@ namespace BowlingStats.Views
 
         async void Save_Clicked(object sender, EventArgs e)
         {
+            string errorMessage = DataValidator.Validate(BowlingCenter).ErrorMessage;
+
+            if (!string.IsNullOrEmpty(errorMessage))
+            {
+                await DisplayAlert("Errore", errorMessage, "OK");
+                return;
+            }
+
             MessagingCenter.Send(this, "SaveBowlingCenter", BowlingCenter);
             await Navigation.PopModalAsync();
         }
