@@ -18,11 +18,6 @@
 
     <ScrollView>
         <StackLayout Spacing="20" Padding="15">
-            <!--<Label Text="Tipo Torneo" FontSize="Medium" />-->
-            <!--<Picker Title="Seleziona il tipo torneo"
-                    TitleColor="Red"
-                    ItemsSource="{Binding TournamentTypes}"
-                    SelectedIndex="{Binding Tournament.TournamentType, Converter={StaticResource IntEnum}}"/>-->
             <Label Text="Centro bowling" FontSize="Medium" TextColor="Blue" FontAttributes="Bold"/>
             <Picker x:Name="BowlingCenterPicker" Title="Seleziona il centro bowling"
                     TitleColor="Red"
@@ -30,10 +25,10 @@
                     ItemDisplayBinding="{Binding Resume}"
                     SelectedItem="{Binding Filters.BowlingCenter}"
                     />
-            <Label Text="Data inizio" FontSize="Title" TextColor="Blue" FontAttributes="Bold"/>
-            <DatePicker Date="{Binding Filters.DateFrom}" TextColor="Blue" FontSize="Title" FontAttributes="Bold" />
-            <Label Text="Data fine" FontSize="Title" TextColor="Blue" FontAttributes="Bold" />
-            <DatePicker Date="{Binding Filters.DateTo}" TextColor="Blue" FontSize="Title" FontAttributes="Bold" BackgroundColor="Transparent" />
+            <Label Text="Data inizio"/>
+            <DatePicker Date="{Binding Filters.DateFrom}" />
+            <Label Text="Data fine" />
+            <DatePicker Date="{Binding Filters.DateTo}" />
         </StackLayout>
             
     </ScrollView>

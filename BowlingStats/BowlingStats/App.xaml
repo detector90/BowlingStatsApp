@@ -21,6 +21,16 @@
                 <Setter Property="WidthRequest" Value="80"/>
                 <Setter Property="BorderColor" Value="Black"/>
             </Style>
+            <Style TargetType="Label">
+                <!--<Setter Property="BackgroundColor" Value="White"/>-->
+                <Setter Property="TextColor" Value="Blue"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+            </Style>
+            <Style TargetType="Entry">
+                <!--<Setter Property="BackgroundColor" Value="White"/>-->
+                <Setter Property="TextColor" Value="Red"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+            </Style>
             <Style x:Key="FrameNumber" TargetType="Frame">
                 <Setter Property="WidthRequest" Value="80"/>
             </Style>
