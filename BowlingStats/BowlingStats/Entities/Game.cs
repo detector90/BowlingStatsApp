@@ -14,6 +14,5 @@ namespace BowlingStats.Entities
         public int TournamentID { get; set; }
         public int GameOrderID { get; set; }
         public int Score { get; set; }
-        //public Tournament Tournament { get; set; }
     }
 }

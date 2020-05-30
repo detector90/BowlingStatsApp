@@ -106,7 +106,6 @@ namespace BowlingStats.Services
             return await Task.FromResult(true);
         }
 
-        //public async Task<bool> UpdateTournamentAsync(TournamentModel tournament)
         public async Task<bool> UpdateTournamentAsync(TournamentModel tournament, ICollection<GameModel> games)
 
         {
@@ -254,17 +253,14 @@ namespace BowlingStats.Services
                 TournamentID = tournamentId,
                 ID = game.ID,
                 GameOrderID = game.GameOrderID,
-                Score = game.HasDetails ? game.CalculateScore() : game.FinalScore
+                Score = game.CalculateScore()
             };
 
             result = App.Database.UpdateGame(gameTodb);
 
             if (result)
             {
-                if (game.HasDetails)
-                    result = SaveGameFrames(gameTodb.ID, game.Frames);
-                else
-                    App.Database.DeleteFrames(gameTodb.ID);
+                result = SaveGameFrames(gameTodb.ID, game.Frames);
             }
 
             return result;
@@ -316,7 +312,6 @@ namespace BowlingStats.Services
                     FinalScore = dbTournamentGame.Score,
                     FinalScoreHDP = dbTournamentGame.Score + dbTournament.Handicap <= 300 ? dbTournamentGame.Score + dbTournament.Handicap : 300,
                     Frames = gameFrames,
-                    HasDetails = gameFrames.Count > 0
                 });
             }
 

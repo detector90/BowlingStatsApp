@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xamarin.Forms;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace BowlingStats.Models
 {
@@ -12,19 +13,16 @@ namespace BowlingStats.Models
         public int GameOrderID { get; set; }
         public int FinalScore { get; set; }
         public int FinalScoreHDP { get; set; }
-        public bool HasDetails { get; set; }
         public ObservableCollection<FrameModel> Frames { get; set; }
 
         public List<string> allowedChars = new List<string>{ "F", "f", "X", "x", "-", "/" };
 
         public GameModel()
         {
-            HasDetails = false;
             Frames = new ObservableCollection<FrameModel>();
 
             for (int i = 0; i < 10; i++)
             {
-                //Frames[i] = new FrameModel();
                 Frames.Add(new FrameModel());
             }
         }
@@ -164,12 +162,6 @@ namespace BowlingStats.Models
                         }
                     }
                 }
-
-                //if (string.IsNullOrEmpty(message))
-                //{
-                //    CalculateScore();
-                //    message = $"Calculated = {FinalScore}";
-                //}
             } catch (Exception e)
             {
                 message = e.Message;

@@ -1,10 +1,8 @@
 ﻿using BowlingStats.Entities;
 using BowlingStats.Models;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
 
 namespace BowlingStats.Utils
 {
@@ -31,7 +29,7 @@ namespace BowlingStats.Utils
 
             string message;
 
-            if (game.HasDetails && !string.IsNullOrEmpty(message = game.ValidateDetailScore()))
+            if (!string.IsNullOrEmpty(message = game.ValidateDetailScore()))
             {
                 return new ValidationResult(message);
             }
