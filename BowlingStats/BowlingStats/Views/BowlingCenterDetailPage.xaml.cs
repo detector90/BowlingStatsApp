@@ -41,21 +41,13 @@ namespace BowlingStats.Views
 
         async void Save_Clicked(object sender, EventArgs e)
         {
-            //string errorMessage = GameValidation.Validate(BowlingCenter, TournamentID).ErrorMessage;
-
-            //if (!string.IsNullOrEmpty(errorMessage))
-            //{
-            //    await DisplayAlert("Errore", errorMessage, "OK");
-            //    return;
-            //}
-
             MessagingCenter.Send(this, "SaveBowlingCenter", BowlingCenter);
-            await Navigation.PopAsync();
+            await Navigation.PopModalAsync();
         }
 
         async void Cancel_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PopAsync();
+            await Navigation.PopModalAsync();
         }
     }
 }

@@ -51,7 +51,7 @@ namespace BowlingStats.Views
                     break;
 
                 case "- Modifica centro bowling":
-                    await Navigation.PushAsync(new BowlingCenterDetailPage(bowlingCenter));
+                    await Navigation.PushModalAsync(new NavigationPage(new BowlingCenterDetailPage(bowlingCenter)));
                     break;
 
                 default:

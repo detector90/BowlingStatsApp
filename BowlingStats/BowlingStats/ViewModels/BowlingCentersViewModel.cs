@@ -22,7 +22,6 @@ namespace BowlingStats.ViewModels
             LoadBowlingCentersCommand = new Command(async () => await ExecuteLoadBowlingCentersCommand());
 
             MessagingCenter.Unsubscribe<BowlingCenterDetailPage, BowlingCenterModel>(typeof(BowlingCentersViewModel), "SaveBowlingCenter");
-            //MessagingCenter.Unsubscribe<TournamentDetailPage, GameModel>(typeof(TournamentDetailViewModel), "DeleteGame");
 
             MessagingCenter.Subscribe<BowlingCenterDetailPage, BowlingCenterModel>(typeof(BowlingCentersViewModel), "SaveBowlingCenter", async (obj, item) =>
             {
