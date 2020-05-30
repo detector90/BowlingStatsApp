@@ -12,7 +12,6 @@ namespace BowlingStats
     public partial class App : Application
     {
         static Database database;
-        Filters filter;
 
         public static Database Database
         {
@@ -26,7 +25,7 @@ namespace BowlingStats
             }
         }
 
-        public Filters Filter { get; set; }
+        public static Filters Filter { get; set; }
 
         public App()
         {

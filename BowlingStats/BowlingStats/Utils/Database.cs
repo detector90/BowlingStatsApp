@@ -1,5 +1,6 @@
 ﻿using BowlingStats.Entities;
 using BowlingStats.Enums;
+using BowlingStats.Models;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -21,9 +22,15 @@ namespace BowlingStats.Utils
             _database.CreateTableAsync<Frame>().Wait();
         }
 
-        public Task<List<Tournament>> GetTournamentsAsync()
+        public Task<List<Tournament>> GetTournamentsAsync(Filters globalFilter)
         {
-            return _database.Table<Tournament>().OrderByDescending(x => x.EventDate).ToListAsync();
+            var tournaments = _database.Table<Tournament>().Where(x => x.EventDate < globalFilter.DateTo && x.EventDate > globalFilter.DateFrom);
+
+            if (globalFilter.BowlingID != 0)
+                tournaments = tournaments.Where(x => x.BowlingCenterID == globalFilter.BowlingID);
+                
+                
+            return tournaments.OrderByDescending(x => x.EventDate).ToListAsync();
         }
 
         public Task<Tournament> GetTournamentAsync(int tournamentID)

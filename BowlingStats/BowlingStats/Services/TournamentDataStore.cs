@@ -35,7 +35,7 @@ namespace BowlingStats.Services
 
                 tournaments = new List<TournamentModel>();
 
-                foreach (Tournament dbTournament in App.Database.GetTournamentsAsync().Result)
+                foreach (Tournament dbTournament in App.Database.GetTournamentsAsync(App.Filter).Result)
                 {
                     ObservableCollection<GameModel> tournamentGames = new ObservableCollection<GameModel>();
 
@@ -81,7 +81,7 @@ namespace BowlingStats.Services
                 }
             );
 
-            foreach (Tournament dbTournament in App.Database.GetTournamentsAsync().Result)
+            foreach (Tournament dbTournament in App.Database.GetTournamentsAsync(App.Filter).Result)
             {
                 var bowlingCenter = App.Database.GetBowlingCenterAsync(dbTournament.ID).Result;
 
@@ -140,7 +140,7 @@ namespace BowlingStats.Services
                 await App.Database.UpdateGamesAsync(gamesToUpdate);
             }
 
-            foreach (Tournament dbTournament in App.Database.GetTournamentsAsync().Result)
+            foreach (Tournament dbTournament in App.Database.GetTournamentsAsync(App.Filter).Result)
             {
                 var bowlingCenter = App.Database.GetBowlingCenterAsync(dbTournament.ID).Result;
 
@@ -171,7 +171,7 @@ namespace BowlingStats.Services
 
             await App.Database.DeleteTournamentAsync(id);
 
-            foreach (Tournament dbTournament in App.Database.GetTournamentsAsync().Result)
+            foreach (Tournament dbTournament in App.Database.GetTournamentsAsync(App.Filter).Result)
             {
                 var bowlingCenter = App.Database.GetBowlingCenterAsync(dbTournament.ID).Result;
 
@@ -205,7 +205,7 @@ namespace BowlingStats.Services
         {
             tournaments.Clear();
 
-            foreach (Tournament dbTournament in App.Database.GetTournamentsAsync().Result)
+            foreach (Tournament dbTournament in App.Database.GetTournamentsAsync(App.Filter).Result)
             {
                 var bowlingCenter = App.Database.GetBowlingCenterAsync(dbTournament.BowlingCenterID).Result;
 
@@ -299,7 +299,7 @@ namespace BowlingStats.Services
         public Task<IEnumerable<GameModel>> GetTournamentGamesAsync(int tournamentId)
         {
             games = new List<GameModel>();
-            Tournament dbTournament = App.Database.GetTournamentsAsync().Result.Where(x => x.ID == tournamentId).FirstOrDefault();
+            Tournament dbTournament = App.Database.GetTournamentsAsync(App.Filter).Result.Where(x => x.ID == tournamentId).FirstOrDefault();
 
             foreach (Game dbTournamentGame in App.Database.GetTournamentGames(tournamentId).Result)
             {
@@ -395,23 +395,42 @@ namespace BowlingStats.Services
         {
             games = new List<GameModel>();
 
-            foreach (Game dbGame in App.Database.GetAllGames().Result)
+            foreach (Tournament dbTournament in App.Database.GetTournamentsAsync(App.Filter).Result)
             {
-                Tournament tournament = App.Database.GetTournamentAsync(dbGame.TournamentID).Result;
-                BowlingCenter bowlingCenter = tournament.BowlingCenterID != 0 ? App.Database.GetBowlingCenterAsync(tournament.BowlingCenterID).Result : null;
+                if (filter == OfficialFilterEnum.All || (filter == OfficialFilterEnum.OnlyOfficial && dbTournament.IsOfficial) || (filter == OfficialFilterEnum.OnlyUnofficial && !dbTournament.IsOfficial)) {
+                    BowlingCenter bowlingCenter = App.Database.GetBowlingCenterAsync(dbTournament.BowlingCenterID).Result;
 
-                if (filter == OfficialFilterEnum.All || (filter == OfficialFilterEnum.OnlyOfficial && tournament.IsOfficial) || (filter == OfficialFilterEnum.OnlyUnofficial && !tournament.IsOfficial))
-                {
-                    games.Add(new GameModel()
+                    foreach (Game dbGame in App.Database.GetTournamentGames(dbTournament.ID).Result)
                     {
-                        ID = dbGame.ID,
-                        TournamentResume = bowlingCenter != null ? string.Concat(bowlingCenter.City, " - ", tournament.EventDate.ToString("dd/MM/yyyy")) : tournament.EventDate.ToString("dd/MM/yyyy"),
-                        GameOrderID = dbGame.GameOrderID,
-                        FinalScore = dbGame.Score,
-                        FinalScoreHDP = dbGame.Score + tournament.Handicap <= 300 ? dbGame.Score + tournament.Handicap : 300
-                    });
+                        games.Add(new GameModel()
+                        {
+                            ID = dbGame.ID,
+                            TournamentResume = bowlingCenter != null ? string.Concat(bowlingCenter.City, " - ", dbTournament.EventDate.ToString("dd/MM/yyyy")) : dbTournament.EventDate.ToString("dd/MM/yyyy"),
+                            GameOrderID = dbGame.GameOrderID,
+                            FinalScore = dbGame.Score,
+                            FinalScoreHDP = dbGame.Score + dbTournament.Handicap <= 300 ? dbGame.Score + dbTournament.Handicap : 300
+                        });
+                    }
                 }
             }
+
+            //foreach (Game dbGame in App.Database.GetAllGames().Result)
+            //{
+            //    Tournament tournament = App.Database.GetTournamentAsync(dbGame.TournamentID).Result;
+            //    BowlingCenter bowlingCenter = tournament.BowlingCenterID != 0 ? App.Database.GetBowlingCenterAsync(tournament.BowlingCenterID).Result : null;
+
+            //    if (filter == OfficialFilterEnum.All || (filter == OfficialFilterEnum.OnlyOfficial && tournament.IsOfficial) || (filter == OfficialFilterEnum.OnlyUnofficial && !tournament.IsOfficial))
+            //    {
+            //        games.Add(new GameModel()
+            //        {
+            //            ID = dbGame.ID,
+            //            TournamentResume = bowlingCenter != null ? string.Concat(bowlingCenter.City, " - ", tournament.EventDate.ToString("dd/MM/yyyy")) : tournament.EventDate.ToString("dd/MM/yyyy"),
+            //            GameOrderID = dbGame.GameOrderID,
+            //            FinalScore = dbGame.Score,
+            //            FinalScoreHDP = dbGame.Score + tournament.Handicap <= 300 ? dbGame.Score + tournament.Handicap : 300
+            //        });
+            //    }
+            //}
             return Task.FromResult(games.AsEnumerable());
         }
 
@@ -419,35 +438,59 @@ namespace BowlingStats.Services
         {
             frames = new List<FrameModel>();
 
-            foreach (Game dbGame in App.Database.GetAllGames().Result)
+            foreach (Tournament dbTournament in App.Database.GetTournamentsAsync(App.Filter).Result)
             {
-                Tournament tournament = App.Database.GetTournamentAsync(dbGame.TournamentID).Result;
-                BowlingCenter bowlingCenter = tournament.BowlingCenterID != 0 ? App.Database.GetBowlingCenterAsync(tournament.BowlingCenterID).Result : null;
-
-                if (filter == OfficialFilterEnum.All || (filter == OfficialFilterEnum.OnlyOfficial && tournament.IsOfficial) || (filter == OfficialFilterEnum.OnlyUnofficial && !tournament.IsOfficial))
+                if (filter == OfficialFilterEnum.All || (filter == OfficialFilterEnum.OnlyOfficial && dbTournament.IsOfficial) || (filter == OfficialFilterEnum.OnlyUnofficial && !dbTournament.IsOfficial))
                 {
-                    var framesToAdd = App.Database.GetGameFrames(dbGame.ID).Result;
+                    BowlingCenter bowlingCenter = App.Database.GetBowlingCenterAsync(dbTournament.BowlingCenterID).Result;
 
-                    framesToAdd.ForEach(x => frames.Add(new FrameModel()
+                    foreach (Game dbGame in App.Database.GetTournamentGames(dbTournament.ID).Result)
                     {
-                        ID = x.ID,
-                        DbFirstAttempt = x.FirstAttempt,
-                        DbSecondAttempt = x.SecondAttempt,
-                        DbThirdAttempt = x.ThirdAttempt,
-                        IsSpare = x.IsSpare,
-                        IsStrike = x.IsStrike
-                    }));
+                        var framesToAdd = App.Database.GetGameFrames(dbGame.ID).Result;
 
-                    //games.Add(new GameModel()
-                    //{
-                    //    ID = dbGame.ID,
-                    //    TournamentResume = bowlingCenter != null ? string.Concat(bowlingCenter.City, " - ", tournament.EventDate.ToString("dd/MM/yyyy")) : tournament.EventDate.ToString("dd/MM/yyyy"),
-                    //    GameOrderID = dbGame.GameOrderID,
-                    //    FinalScore = dbGame.Score,
-                    //    FinalScoreHDP = dbGame.Score + tournament.Handicap <= 300 ? dbGame.Score + tournament.Handicap : 300
-                    //});
+                        framesToAdd.ForEach(x => frames.Add(new FrameModel()
+                        {
+                            ID = x.ID,
+                            DbFirstAttempt = x.FirstAttempt,
+                            DbSecondAttempt = x.SecondAttempt,
+                            DbThirdAttempt = x.ThirdAttempt,
+                            IsSpare = x.IsSpare,
+                            IsStrike = x.IsStrike
+                        }));
+                    }
                 }
             }
+
+
+            //foreach (Game dbGame in App.Database.GetAllGames().Result)
+            //{
+            //    Tournament tournament = App.Database.GetTournamentAsync(dbGame.TournamentID).Result;
+            //    BowlingCenter bowlingCenter = tournament.BowlingCenterID != 0 ? App.Database.GetBowlingCenterAsync(tournament.BowlingCenterID).Result : null;
+
+            //    if (filter == OfficialFilterEnum.All || (filter == OfficialFilterEnum.OnlyOfficial && tournament.IsOfficial) || (filter == OfficialFilterEnum.OnlyUnofficial && !tournament.IsOfficial))
+            //    {
+            //        var framesToAdd = App.Database.GetGameFrames(dbGame.ID).Result;
+
+            //        framesToAdd.ForEach(x => frames.Add(new FrameModel()
+            //        {
+            //            ID = x.ID,
+            //            DbFirstAttempt = x.FirstAttempt,
+            //            DbSecondAttempt = x.SecondAttempt,
+            //            DbThirdAttempt = x.ThirdAttempt,
+            //            IsSpare = x.IsSpare,
+            //            IsStrike = x.IsStrike
+            //        }));
+
+            //        //games.Add(new GameModel()
+            //        //{
+            //        //    ID = dbGame.ID,
+            //        //    TournamentResume = bowlingCenter != null ? string.Concat(bowlingCenter.City, " - ", tournament.EventDate.ToString("dd/MM/yyyy")) : tournament.EventDate.ToString("dd/MM/yyyy"),
+            //        //    GameOrderID = dbGame.GameOrderID,
+            //        //    FinalScore = dbGame.Score,
+            //        //    FinalScoreHDP = dbGame.Score + tournament.Handicap <= 300 ? dbGame.Score + tournament.Handicap : 300
+            //        //});
+            //    }
+            //}
             return Task.FromResult(frames.AsEnumerable());
         }
 
