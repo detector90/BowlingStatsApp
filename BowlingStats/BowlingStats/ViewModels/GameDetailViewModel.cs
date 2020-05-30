@@ -65,24 +65,6 @@ namespace BowlingStats.ViewModels
                 Frames[CurrentFrame].SecondAttemptSelected = selected;
                 Frames[CurrentFrame].ThirdAttemptSelected = selected;
             }
-            
-
-            //if (selected && attempt == 1)
-            //{
-            //    Frames[index].FirstAttempt = "";
-            //    Frames[index].DbFirstAttempt = 0;
-            //    Frames[index].SecondAttempt = "";
-            //    Frames[index].DbSecondAttempt = 0;
-            //    Frames[index].ThirdAttempt = "";
-            //    Frames[index].DbThirdAttempt = 0;
-            //}
-
-            //if (attempt == 1)
-            //    Frames[index].FirstAttemptSelected = true;
-            //if (attempt == 2)
-            //    Frames[index].SecondAttemptSelected = true;
-            //if (attempt == 3)
-            //    Frames[index].ThirdAttemptSelected = true;
 
             OnPropertyChanged("Frames");
         }
@@ -154,8 +136,6 @@ namespace BowlingStats.ViewModels
                                 Frames[CurrentFrame].DbSecondAttempt = Int32.Parse(value);
                             }
                         }
-
-                        // Gestire caso decimo frame
 
                         CurrentFrame++;
                         CurrentAttempt = 1;
