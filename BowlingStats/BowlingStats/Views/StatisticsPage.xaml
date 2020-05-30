@@ -14,12 +14,14 @@
         <ToolbarItem Text="Nuovo evento" Clicked="AddTournament_Clicked" />
     </ContentPage.ToolbarItems>-->
 
-    <ScrollView>
-        <StackLayout Spacing="20" Padding="15">
+    <!--<ScrollView>-->
+        <Frame BackgroundColor="BurlyWood" Opacity="0.6" CornerRadius="10" Margin="5,20,5,20">
+            <ScrollView>
+        <StackLayout Spacing="20" Padding="15" >
             <!--GLOBALI-->
             <Label Text="Statistiche Globali" FontSize="Large" FontAttributes="Bold" TextColor="Red"/>
             <Label Text="Media Scratch" FontSize="Large" FontAttributes="Bold" />
-            <Label Text="{Binding GlobalStatistics.ScratchAverage}" FontSize="Medium"/>
+            <Label Text="{Binding GlobalStatistics.ScratchAverage}" FontSize="Medium" />
             <Label Text="Media Handicap" FontSize="Large" FontAttributes="Bold" />
             <Label Text="{Binding GlobalStatistics.HdpAverage}" FontSize="Medium"/>
             <Label Text="Numero partite giocate" FontSize="Large" FontAttributes="Bold" />
@@ -85,7 +87,9 @@
             <Label Text="Percentuale conversione spare" FontSize="Large" FontAttributes="Bold" />
             <Label Text="{Binding UnofficialStatistics.SpareConversionPercentage}" FontSize="Medium"/>
         </StackLayout>
-            
-    </ScrollView>
+            </ScrollView>
+        </Frame>
+
+    <!--</ScrollView>-->
     
 </bs:MyContentPage>
