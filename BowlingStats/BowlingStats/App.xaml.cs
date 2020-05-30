@@ -5,6 +5,7 @@ using BowlingStats.Services;
 using BowlingStats.Views;
 using BowlingStats.Utils;
 using System.IO;
+using BowlingStats.Models;
 
 namespace BowlingStats
 {
@@ -24,12 +25,25 @@ namespace BowlingStats
             }
         }
 
+        public static Filters Filter { get; set; }
+
         public App()
         {
             InitializeComponent();
 
             DependencyService.Register<TournamentDataStore>();
+            ResetFilters();
             MainPage = new MainPage();
+        }
+
+        public static void ResetFilters()
+        {
+            Filter = new Filters()
+            {
+                BowlingCenter = null,
+                DateFrom = new DateTime(DateTime.Now.Year, 1, 1),
+                DateTo = new DateTime(DateTime.Now.Year, 12, 31)
+            };
         }
 
         protected override void OnStart()

@@ -22,7 +22,8 @@ namespace BowlingStats.Views
             {
                 new HomeMenuItem {Id = MenuItemType.EventsList, Title="Elenco eventi" },
                 new HomeMenuItem {Id = MenuItemType.Statistics, Title="Statistiche" },
-                new HomeMenuItem {Id = MenuItemType.BowlingCenters, Title="Centri bowling" }
+                new HomeMenuItem {Id = MenuItemType.BowlingCenters, Title="Centri bowling" },
+                new HomeMenuItem {Id = MenuItemType.Filters, Title="Filtri" }
             };
 
             ListViewMenu.ItemsSource = menuItems;

@@ -1,4 +1,5 @@
 ﻿using BowlingStats.Enums;
+using BowlingStats.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -21,7 +22,6 @@ namespace BowlingStats.Services
         #region Statistics
         Task<IEnumerable<Q>> GetAllGames(OfficialFilterEnum filter);
         Task<IEnumerable<F>> GetAllFrames(OfficialFilterEnum filter);
-        //Task<IEnumerable<Q>> GetAllGames();
         #endregion
 
         #region BowlingCenters
