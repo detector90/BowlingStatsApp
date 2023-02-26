@@ -15,14 +15,16 @@
     </ContentPage.ToolbarItems>
     
     <ContentPage.Content>
-        <StackLayout Spacing="20" Padding="15">
-            <Label Text="Città" FontSize="Medium" />
-            <Entry Text="{Binding BowlingCenter.City}" FontSize="Small" />
-            <Label Text="Nome" FontSize="Medium" />
-            <Entry Text="{Binding BowlingCenter.Name}" FontSize="Small" />
-            <Label Text="Indirizzo" FontSize="Medium" />
-            <Entry Text="{Binding BowlingCenter.Address}" FontSize="Small" />
-        </StackLayout>
+        <Frame BackgroundColor="BurlyWood" Opacity="0.6" CornerRadius="10" Margin="5,20,5,20">
+            <StackLayout Spacing="20" Padding="15">
+                <Label Text="Città" FontSize="Medium" />
+                <Entry Text="{Binding BowlingCenter.City}" FontSize="Small" />
+                <Label Text="Nome" FontSize="Medium" />
+                <Entry Text="{Binding BowlingCenter.Name}" FontSize="Small" />
+                <Label Text="Indirizzo" FontSize="Medium" />
+                <Entry Text="{Binding BowlingCenter.Address}" FontSize="Small" />
+            </StackLayout>
+        </Frame>
     </ContentPage.Content>
     
 </bs:MyContentPage>
