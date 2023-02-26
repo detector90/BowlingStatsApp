@@ -14,8 +14,9 @@
         <ToolbarItem Text="Nuovo centro bowling" Clicked="AddBowlingCenter_Clicked" />
     </ContentPage.ToolbarItems>
 
-    <StackLayout>
-        <ListView x:Name="BowlingCentersListView"
+    <Frame BackgroundColor="BurlyWood" Opacity="0.6" CornerRadius="10" Margin="5,20,5,20">
+        <StackLayout>
+            <ListView x:Name="BowlingCentersListView"
                 ItemsSource="{Binding BowlingCenters}"
                 VerticalOptions="FillAndExpand"
                 HasUnevenRows="true"
@@ -25,33 +26,40 @@
                 CachingStrategy="RecycleElement"
                 ItemSelected="OnBowlingCenterSelected"
                 >
-            <d:ListView.ItemsSource>
-                <x:Array Type="{x:Type x:String}">
-                    <x:String>First Item</x:String>
-                    <x:String>Second Item</x:String>
-                    <x:String>Third Item</x:String>
-                    <x:String>Forth Item</x:String>
-                    <x:String>Fifth Item</x:String>
-                    <x:String>Sixth Item</x:String>
-                </x:Array>
-            </d:ListView.ItemsSource>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <StackLayout Padding="10" Margin="0,0,0,10">
-                            <Label Text="{Binding City}"
+                <d:ListView.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>First Item</x:String>
+                        <x:String>Second Item</x:String>
+                        <x:String>Third Item</x:String>
+                        <x:String>Forth Item</x:String>
+                        <x:String>Fifth Item</x:String>
+                        <x:String>Sixth Item</x:String>
+                    </x:Array>
+                </d:ListView.ItemsSource>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame CornerRadius="10" Padding="0" Margin="5">
+                                <StackLayout>
+                                    <Label Text="{Binding City}"
+                                           TextColor="Black"
                                 LineBreakMode="NoWrap" 
                                 Style="{DynamicResource ListItemTextStyle}" 
-                                FontSize="16"/>
-                            <Label Text="{Binding Name}" 
-                                LineBreakMode="NoWrap"
+                                FontSize="Medium"
+                                BackgroundColor="Cyan"
+                                           Padding="0,5,0,5"
+                                           HorizontalTextAlignment="Center"/>
+                                    <Label Text="{Binding Name}" 
+                                LineBreakMode="WordWrap"
                                 Style="{DynamicResource ListItemDetailTextStyle}"
-                                FontSize="14" />
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </StackLayout>
-    
+                                FontSize="Small" Padding="5,0,5,0"/>
+                                </StackLayout>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </Frame>
+
 </bs:MyContentPage>
