@@ -15,7 +15,7 @@
     </bs:MyContentPage.ToolbarItems>
 
     <bs:MyContentPage.Content>
-        <Frame BackgroundColor="White" Opacity="0.6" CornerRadius="10" Margin="5,20,5,20">
+        <Frame BackgroundColor="BurlyWood" Opacity="0.6" CornerRadius="10" Margin="5,20,5,20">
             <StackLayout Spacing="20" Padding="15">
 
                 <StackLayout Orientation="Horizontal">
