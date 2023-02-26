@@ -20,36 +20,37 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <ScrollView>
-        <StackLayout Spacing="20" Padding="15">
-            <Label Text="Tipo Torneo" FontSize="Medium" />
-            <Picker Title="Seleziona il tipo torneo"
+    <Frame BackgroundColor="BurlyWood" Opacity="0.6" CornerRadius="10" Margin="5,20,5,20">
+        <ScrollView>
+            <StackLayout Spacing="20" Padding="15">
+                <Label Text="Tipo Torneo" FontSize="Medium" />
+                <Picker Title="Seleziona il tipo torneo"
                         TitleColor="Red"
                         ItemsSource="{Binding TournamentTypes}"
                         SelectedIndex="{Binding Tournament.TournamentType, Converter={StaticResource IntEnum}}" />
-            <Label Text="Centro bowling" FontSize="Medium" />
-            <Picker x:Name="BowlingCentersList" Title="Seleziona il centro bowling"
+                <Label Text="Centro bowling" FontSize="Medium" />
+                <Picker x:Name="BowlingCentersList" Title="Seleziona il centro bowling"
                     TitleColor="Red"
                     ItemsSource="{Binding BowlingCenters}"
                     ItemDisplayBinding="{Binding Resume}"
                     SelectedItem="{Binding Tournament.BowlingCenter}"
                     />
-            <Label Text="Handicap" FontSize="Medium" />
-            <Entry Text="{Binding Tournament.Handicap}" Keyboard="Numeric" FontSize="Small" />
-            <Label Text="Descrizione" FontSize="Medium" />
-            <Entry Text="{Binding Tournament.Description}" d:Text="Descrizione torneo" FontSize="Small" />
-            <Label Text="Data" FontSize="Medium" />
-            <DatePicker Date="{Binding Tournament.EventDate}" Format="dd/MM/yyyy"/>
-            <Label Text="Torneo ufficiale" FontSize="Medium" />
-            <CheckBox IsChecked="{Binding Tournament.IsOfficial}"/>
-            <Label Text="Partite giocate" FontSize="Large"/>
-            <StackLayout Orientation="Horizontal" FlowDirection="RightToLeft">
-                <ImageButton Source="Add_icon.png" Aspect="AspectFit" BackgroundColor="Transparent" x:Name="AddGame" HorizontalOptions="End" Clicked="AddGame_Clicked"></ImageButton>
-                <ImageButton Source="Delete_icon.png" IsVisible="False" Aspect="AspectFit" BackgroundColor="Transparent" x:Name="DeleteGame" HorizontalOptions="End" Clicked="DeleteGame_Clicked"></ImageButton>
-                <ImageButton Source="Edit_icon.png" IsVisible="False" Aspect="AspectFit" BackgroundColor="Transparent" x:Name="EditGame" HorizontalOptions="End" Clicked="EditGame_Clicked"></ImageButton>
-            </StackLayout>
-            <StackLayout>
-                <ListView x:Name="GamesListView"
+                <Label Text="Handicap" FontSize="Medium" />
+                <Entry Text="{Binding Tournament.Handicap}" Keyboard="Numeric" FontSize="Small" />
+                <Label Text="Descrizione" FontSize="Medium" />
+                <Entry Text="{Binding Tournament.Description}" d:Text="Descrizione torneo" FontSize="Small" />
+                <Label Text="Data" FontSize="Medium" />
+                <DatePicker Date="{Binding Tournament.EventDate}" Format="dd/MM/yyyy"/>
+                <Label Text="Torneo ufficiale" FontSize="Medium" />
+                <CheckBox IsChecked="{Binding Tournament.IsOfficial}"/>
+                <Label Text="Partite giocate" FontSize="Large"/>
+                <StackLayout Orientation="Horizontal" FlowDirection="RightToLeft">
+                    <ImageButton Source="Add_icon.png" Aspect="AspectFit" BackgroundColor="Transparent" x:Name="AddGame" HorizontalOptions="End" Clicked="AddGame_Clicked"></ImageButton>
+                    <ImageButton Source="Delete_icon.png" IsVisible="False" Aspect="AspectFit" BackgroundColor="Transparent" x:Name="DeleteGame" HorizontalOptions="End" Clicked="DeleteGame_Clicked"></ImageButton>
+                    <ImageButton Source="Edit_icon.png" IsVisible="False" Aspect="AspectFit" BackgroundColor="Transparent" x:Name="EditGame" HorizontalOptions="End" Clicked="EditGame_Clicked"></ImageButton>
+                </StackLayout>
+                <StackLayout>
+                    <ListView x:Name="GamesListView"
                     ItemsSource="{Binding Tournament.Games}"
                     VerticalOptions="FillAndExpand"
                     HasUnevenRows="true"
@@ -59,38 +60,38 @@
                     CachingStrategy="RecycleElement"
                     ItemSelected="GamesListView_ItemSelected"
                     >
-                    <d:ListView.ItemsSource>
-                        <x:Array Type="{x:Type x:String}">
-                            <x:String>First Item</x:String>
-                            <x:String>Second Item</x:String>
-                            <x:String>Third Item</x:String>
-                            <x:String>Forth Item</x:String>
-                            <x:String>Fifth Item</x:String>
-                            <x:String>Sixth Item</x:String>
-                        </x:Array>
-                    </d:ListView.ItemsSource>
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <StackLayout Padding="10" Margin="0,0,0,10">
-                                    <Label Text="{Binding GameOrderID}"
+                        <d:ListView.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>First Item</x:String>
+                                <x:String>Second Item</x:String>
+                                <x:String>Third Item</x:String>
+                                <x:String>Forth Item</x:String>
+                                <x:String>Fifth Item</x:String>
+                                <x:String>Sixth Item</x:String>
+                            </x:Array>
+                        </d:ListView.ItemsSource>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout Padding="10" Margin="0,0,0,10">
+                                        <Label Text="{Binding GameOrderID}"
                                     LineBreakMode="NoWrap" 
                                     Style="{DynamicResource ListItemTextStyle}" 
                                     FontSize="16"
                                     TextColor="Black" 
                                            />
-                                    <Label Text="{Binding ScoresResume}" 
+                                        <Label Text="{Binding ScoresResume}" 
                                     TextColor="{Binding TextColor}"
                                     LineBreakMode="NoWrap"
                                     Style="{DynamicResource ListItemDetailTextStyle}"
                                     FontSize="14" />
-                                </StackLayout>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
             </StackLayout>
-        </StackLayout>
-    </ScrollView>
-    
+        </ScrollView>
+    </Frame>
 </bs:MyContentPage>
