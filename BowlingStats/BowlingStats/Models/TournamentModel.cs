@@ -37,7 +37,7 @@ namespace BowlingStats.Models
         {
             get
             {
-                return string.Concat(EventDate.ToString("dd/MM/yyyy"), " - ", Enumerations.GetEnumDescription(TournamentType));
+                return string.Concat(EventDate.ToString("dd/MM/yyyy"), " - ", BowlingCenter.City, " - ", Enumerations.GetEnumDescription(TournamentType));
             }
         }
 
