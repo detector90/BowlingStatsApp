@@ -39,20 +39,25 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        
-                            <StackLayout Padding="10" BackgroundColor="{Binding RowColor}" Margin="0,0,0,10">
+                            <Frame CornerRadius="10" BackgroundColor="{Binding RowColor}" Padding="0" Margin="5" BorderColor="Black">
+                            <StackLayout BackgroundColor="{Binding RowColor}" >
                                 <Label Text="{Binding TournamentResume}"
-                                LineBreakMode="NoWrap" 
+                                LineBreakMode="WordWrap" 
                                 Style="{DynamicResource ListItemTextStyle}" 
-                                FontSize="16"
-                                TextColor="{Binding TitleColor}" />
+                                FontSize="Medium"
+                                TextColor="{Binding TitleColor}"
+                                       BackgroundColor="Cyan"
+                                       HorizontalTextAlignment="Center"
+                                       Padding="0,5,0,5"
+                                       />
                                 <Label Text="{Binding Description}" 
-                                LineBreakMode="NoWrap"
+                                LineBreakMode="WordWrap"
                                 Style="{DynamicResource ListItemDetailTextStyle}"
-                                FontSize="14" />
+                                FontSize="Small" Padding="5,0,5,0" />
                             </StackLayout>
-                        
-                    </ViewCell>
+                            </Frame>
+
+                        </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
