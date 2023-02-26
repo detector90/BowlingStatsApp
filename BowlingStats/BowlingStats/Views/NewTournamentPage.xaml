@@ -20,6 +20,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
+    <Frame BackgroundColor="BurlyWood" Opacity="0.6" CornerRadius="10" Margin="5,20,5,20">
     <ScrollView>
         <StackLayout Spacing="20" Padding="15">
             <Label Text="Tipo Torneo" FontSize="Medium" />
@@ -44,5 +45,6 @@
             <CheckBox IsChecked="{Binding Tournament.IsOfficial}"/>
         </StackLayout>
     </ScrollView>
-    
+    </Frame>
+
 </bs:MyContentPage>
