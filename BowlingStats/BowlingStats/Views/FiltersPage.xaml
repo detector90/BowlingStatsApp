@@ -16,21 +16,23 @@
         <ToolbarItem Text="Conferma" Clicked="Save_Clicked" />
     </ContentPage.ToolbarItems>
 
-    <ScrollView>
-        <StackLayout Spacing="20" Padding="15">
-            <Label Text="Centro bowling" FontSize="Medium" TextColor="Blue" FontAttributes="Bold"/>
-            <Picker x:Name="BowlingCenterPicker" Title="Seleziona il centro bowling"
+    <Frame BackgroundColor="BurlyWood" Opacity="0.6" CornerRadius="10" Margin="5,20,5,20">
+        <ScrollView>
+            <StackLayout Spacing="20" Padding="15">
+                <Label Text="Centro bowling" FontSize="Medium" TextColor="Blue" FontAttributes="Bold"/>
+                <Picker x:Name="BowlingCenterPicker" Title="Seleziona il centro bowling"
                     TitleColor="Red"
                     ItemsSource="{Binding BowlingCenters}"
                     ItemDisplayBinding="{Binding Resume}"
                     SelectedItem="{Binding Filters.BowlingCenter}"
                     />
-            <Label Text="Data inizio"/>
-            <DatePicker Date="{Binding Filters.DateFrom}" />
-            <Label Text="Data fine" />
-            <DatePicker Date="{Binding Filters.DateTo}" />
-        </StackLayout>
-            
-    </ScrollView>
-    
+                <Label Text="Data inizio"/>
+                <DatePicker Date="{Binding Filters.DateFrom}" />
+                <Label Text="Data fine" />
+                <DatePicker Date="{Binding Filters.DateTo}" />
+            </StackLayout>
+
+        </ScrollView>
+    </Frame>
+
 </bs:MyContentPage>
