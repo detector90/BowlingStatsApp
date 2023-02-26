@@ -33,7 +33,7 @@ namespace BowlingStats.Views
             if (bowlingCenter == null)
                 return;
 
-            string result = await DisplayActionSheet("Cosa desideri fare?", "Annulla", null, new string[] { "- Modifica centro bowling", "- Cancella centro bowling" });
+            string result = await DisplayActionSheet("Cosa desideri fare?", "Annulla", null, new string[] { "- Visualizza/Modifica centro bowling", "- Cancella centro bowling" });
 
             switch (result)
             {
@@ -50,7 +50,7 @@ namespace BowlingStats.Views
                     }
                     break;
 
-                case "- Modifica centro bowling":
+                case "- Visualizza/Modifica centro bowling":
                     await Navigation.PushModalAsync(new NavigationPage(new BowlingCenterDetailPage(bowlingCenter)));
                     break;
 
