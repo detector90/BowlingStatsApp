@@ -33,7 +33,7 @@ namespace BowlingStats.Views
             if (tournament == null)
                 return;
 
-            string result = await DisplayActionSheet("Cosa desideri fare?", "Annulla", null, new string[] { "- Modifica evento", "- Cancella evento" });
+            string result = await DisplayActionSheet("Cosa desideri fare?", "Annulla", null, new string[] { "- Visualizza/Modifica evento", "- Cancella evento" });
 
             switch (result)
             {
@@ -41,16 +41,21 @@ namespace BowlingStats.Views
                     break;
 
                 case "- Cancella evento":
-                    bool deleted = await viewModel.DataStore.DeleteTournamentAsync(tournament.ID);
+                    bool confirm = await DisplayAlert("Conferma", "Sei sicuro di voler cancellare l'evento selezionato?", "Si", "No");
 
-                    if (deleted)
+                    if (confirm)
                     {
-                        await DisplayAlert("Cancellazione", "Cancellazione avvenuta con successo!", "ok");
-                        viewModel.LoadTournamentsCommand.Execute(null);
+                        bool deleted = await viewModel.DataStore.DeleteTournamentAsync(tournament.ID);
+
+                        if (deleted)
+                        {
+                            await DisplayAlert("Cancellazione", "Cancellazione avvenuta con successo!", "ok");
+                            viewModel.LoadTournamentsCommand.Execute(null);
+                        }
                     }
                     break;
 
-                case "- Modifica evento":
+                case "- Visualizza/Modifica evento":
                     await Navigation.PushAsync(new TournamentDetailPage(new TournamentDetailViewModel(tournament)));
                     break;
 
