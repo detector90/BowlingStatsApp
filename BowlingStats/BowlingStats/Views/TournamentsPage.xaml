@@ -14,6 +14,7 @@
         <ToolbarItem Text="Nuovo evento" Clicked="AddTournament_Clicked" />
     </ContentPage.ToolbarItems>
 
+    <Frame BackgroundColor="BurlyWood" Opacity="0.6" CornerRadius="10" Margin="5,20,5,20">
     <StackLayout>
         <ListView x:Name="TournamentsListView"
                 ItemsSource="{Binding Tournaments}"
@@ -38,21 +39,24 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout Padding="10" BackgroundColor="{Binding RowColor}" Margin="0,0,0,10">
-                            <Label Text="{Binding TournamentResume}"
+                        
+                            <StackLayout Padding="10" BackgroundColor="{Binding RowColor}" Margin="0,0,0,10">
+                                <Label Text="{Binding TournamentResume}"
                                 LineBreakMode="NoWrap" 
                                 Style="{DynamicResource ListItemTextStyle}" 
                                 FontSize="16"
                                 TextColor="{Binding TitleColor}" />
-                            <Label Text="{Binding Description}" 
+                                <Label Text="{Binding Description}" 
                                 LineBreakMode="NoWrap"
                                 Style="{DynamicResource ListItemDetailTextStyle}"
                                 FontSize="14" />
-                        </StackLayout>
+                            </StackLayout>
+                        
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
     </StackLayout>
-    
+    </Frame>
+
 </bs:MyContentPage>
