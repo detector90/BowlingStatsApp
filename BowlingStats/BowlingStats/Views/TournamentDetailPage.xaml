@@ -46,8 +46,6 @@
                 <Label Text="Partite giocate" FontSize="Large"/>
                 <StackLayout Orientation="Horizontal" FlowDirection="RightToLeft">
                     <ImageButton Source="Add_icon.png" Aspect="AspectFit" BackgroundColor="Transparent" x:Name="AddGame" HorizontalOptions="End" Clicked="AddGame_Clicked"></ImageButton>
-                    <ImageButton Source="Delete_icon.png" IsVisible="False" Aspect="AspectFit" BackgroundColor="Transparent" x:Name="DeleteGame" HorizontalOptions="End" Clicked="DeleteGame_Clicked"></ImageButton>
-                    <ImageButton Source="Edit_icon.png" IsVisible="False" Aspect="AspectFit" BackgroundColor="Transparent" x:Name="EditGame" HorizontalOptions="End" Clicked="EditGame_Clicked"></ImageButton>
                 </StackLayout>
                 <StackLayout>
                     <ListView x:Name="GamesListView"
@@ -73,19 +71,27 @@
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
-                                    <StackLayout Padding="10" Margin="0,0,0,10">
-                                        <Label Text="{Binding GameOrderID}"
+                                    <Frame CornerRadius="10" Padding="0" Margin="5" BorderColor="Black">
+                                        <StackLayout Margin="0,0,0,10">
+                                            <Grid BackgroundColor="Cyan">
+                                                <Label Text="{Binding GameOrderDescription}"
                                     LineBreakMode="NoWrap" 
                                     Style="{DynamicResource ListItemTextStyle}" 
-                                    FontSize="16"
+                                    FontSize="Medium"
                                     TextColor="Black" 
+                                    BackgroundColor="Cyan"
+                                    Padding="5,5,5,5"
                                            />
+                                            <ImageButton Source="Delete_icon.png" BackgroundColor="Transparent" x:Name="DeleteGame" HorizontalOptions="End" Command="{Binding DeleteGameCommand}"></ImageButton>
+                                        </Grid>
                                         <Label Text="{Binding ScoresResume}" 
                                     TextColor="{Binding TextColor}"
                                     LineBreakMode="NoWrap"
                                     Style="{DynamicResource ListItemDetailTextStyle}"
-                                    FontSize="14" />
-                                    </StackLayout>
+                                    FontSize="Small" 
+                                                   Padding="5,0,5,0"/>
+                                        </StackLayout>
+                                    </Frame>
                                 </ViewCell>
                             </DataTemplate>
                         </ListView.ItemTemplate>

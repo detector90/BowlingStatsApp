@@ -6,6 +6,7 @@ using System.Text;
 using Xamarin.Forms;
 using SQLite;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace BowlingStats.Models
 {
@@ -30,7 +31,13 @@ namespace BowlingStats.Models
         {
             if (Games == null)
                 Games = new ObservableCollection<GameModel>();
+            
             Games.Add(game);
+        }
+
+        private async Task DeleteGame(GameModel game)
+        {
+            MessagingCenter.Send(this, "DeleteGame", game);
         }
 
         public string TournamentResume

@@ -15,6 +15,8 @@ namespace BowlingStats.Models
         public int FinalScoreHDP { get; set; }
         public ObservableCollection<FrameModel> Frames { get; set; }
 
+        public Command DeleteGameCommand { get; set; }
+
         public List<string> allowedChars = new List<string>{ "F", "f", "X", "x", "-", "/" };
 
         public GameModel()
@@ -48,6 +50,14 @@ namespace BowlingStats.Models
                 return FinalScore + " (" + FinalScoreHDP + ")";
             }
         }
+
+        public string GameOrderDescription
+        {
+            get
+            {
+                return "Partita N°" + GameOrderID;
+            }
+        } 
 
         internal string ValidateDetailScore()
         {

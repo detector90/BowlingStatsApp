@@ -81,16 +81,18 @@ namespace BowlingStats.Views
 
         private void GamesListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            DeleteGame.IsVisible = true;
-            EditGame.IsVisible = true;
+            GameModel selectedGame = GamesListView.SelectedItem as GameModel;
+            Navigation.PushModalAsync(new NavigationPage(new GameDetailPage(selectedGame, viewModel.Tournament.ID)));
+            //DeleteGame.IsVisible = true;
+            //EditGame.IsVisible = true;
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
 
-            DeleteGame.IsVisible = false;
-            EditGame.IsVisible = false;
+            //DeleteGame.IsVisible = false;
+            //EditGame.IsVisible = false;
 
             //if (viewModel.Tournament.Games == null || viewModel.Tournament.Games.Count == 0)
             viewModel.LoadTournamentGamesCommand.Execute(null);

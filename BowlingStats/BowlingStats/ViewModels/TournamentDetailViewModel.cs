@@ -97,6 +97,7 @@ namespace BowlingStats.ViewModels
 
                 foreach (var tournamentGame in tournamentGames)
                 {
+                    tournamentGame.DeleteGameCommand = new Command(async () => await DeleteGame(tournamentGame));
                     Tournament.Games.Add(tournamentGame);
                 }
             }
@@ -107,6 +108,22 @@ namespace BowlingStats.ViewModels
             finally
             {
                 IsBusy = false;
+            }
+        }
+
+        private async Task DeleteGame(GameModel gameToDelete)
+        {
+            bool confirm = await App.Current.MainPage.DisplayAlert("Conferma", "Sei sicuro di voler cancellare la partita selezionata?", "Si", "No");
+
+            if (confirm)
+            {
+                bool deleted = DataStore.DeleteTournamentGame(gameToDelete.ID);
+
+                if (deleted)
+                {
+                    await App.Current.MainPage.DisplayAlert("Cancellazione", "Cancellazione avvenuta con successo!", "ok");
+                    Tournament.Games.Remove(gameToDelete);
+                }
             }
         }
     }
