@@ -142,5 +142,8 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\Statistics_icon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Delete_icon2.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

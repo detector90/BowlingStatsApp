@@ -71,7 +71,7 @@
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
-                                    <Frame CornerRadius="10" Padding="0" Margin="5" BorderColor="Black">
+                                    <Frame CornerRadius="10" Padding="0" Margin="5" >
                                         <StackLayout Margin="0,0,0,10">
                                             <Grid BackgroundColor="Cyan">
                                                 <Label Text="{Binding GameOrderDescription}"
@@ -82,7 +82,7 @@
                                     BackgroundColor="Cyan"
                                     Padding="5,5,5,5"
                                            />
-                                            <ImageButton Source="Delete_icon.png" BackgroundColor="Transparent" x:Name="DeleteGame" HorizontalOptions="End" Command="{Binding DeleteGameCommand}"></ImageButton>
+                                            <ImageButton Source="Delete_icon2.png" BackgroundColor="Transparent" x:Name="DeleteGame" HorizontalOptions="End" Command="{Binding DeleteGameCommand}"></ImageButton>
                                         </Grid>
                                         <Label Text="{Binding ScoresResume}" 
                                     TextColor="{Binding TextColor}"
