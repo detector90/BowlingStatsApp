@@ -30,38 +30,7 @@ namespace BowlingStats.Views
         async void OnTournamentSelected(object sender, SelectedItemChangedEventArgs args)
         {
             var tournament = args.SelectedItem as TournamentModel;
-            if (tournament == null)
-                return;
-
-            string result = await DisplayActionSheet("Cosa desideri fare?", "Annulla", null, new string[] { "- Visualizza/Modifica evento", "- Cancella evento" });
-
-            switch (result)
-            {
-                case "Annulla":
-                    break;
-
-                case "- Cancella evento":
-                    bool confirm = await DisplayAlert("Conferma", "Sei sicuro di voler cancellare l'evento selezionato?", "Si", "No");
-
-                    if (confirm)
-                    {
-                        bool deleted = await viewModel.DataStore.DeleteTournamentAsync(tournament.ID);
-
-                        if (deleted)
-                        {
-                            await DisplayAlert("Cancellazione", "Cancellazione avvenuta con successo!", "ok");
-                            viewModel.LoadTournamentsCommand.Execute(null);
-                        }
-                    }
-                    break;
-
-                case "- Visualizza/Modifica evento":
-                    await Navigation.PushAsync(new TournamentDetailPage(new TournamentDetailViewModel(tournament)));
-                    break;
-
-                default:
-                    break;
-            }
+            await Navigation.PushAsync(new TournamentDetailPage(new TournamentDetailViewModel(tournament)));
         }
 
         async void AddTournament_Clicked(object sender, EventArgs e)

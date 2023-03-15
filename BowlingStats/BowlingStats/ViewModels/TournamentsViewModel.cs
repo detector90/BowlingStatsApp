@@ -15,6 +15,7 @@ namespace BowlingStats.ViewModels
         public ObservableCollection<TournamentModel> Tournaments { get; set; }
         public Command LoadTournamentsCommand { get; set; }
         public Command LongPressedCommand { get; set; }
+        public Command DeleteTournamentCommand { get; set; }
 
         public TournamentsViewModel()
         {
@@ -62,6 +63,7 @@ namespace BowlingStats.ViewModels
                 var tournaments = await DataStore.GetTournamentsAsync(true);
                 foreach (var tournament in tournaments)
                 {
+                    tournament.DeleteTournamentCommand = new Command(async () => await DeleteTournament(tournament));
                     Tournaments.Add(tournament);
                 }
             }
@@ -72,6 +74,22 @@ namespace BowlingStats.ViewModels
             finally
             {
                 IsBusy = false;
+            }
+        }
+
+        private async Task DeleteTournament(TournamentModel tournamentToDelete)
+        {
+            bool confirm = await App.Current.MainPage.DisplayAlert("Conferma", "Sei sicuro di voler cancellare il torneo selezionato?", "Si", "No");
+
+            if (confirm)
+            {
+                bool deleted = await DataStore.DeleteTournamentAsync(tournamentToDelete.ID);
+
+                if (deleted)
+                {
+                    await App.Current.MainPage.DisplayAlert("Cancellazione", "Cancellazione avvenuta con successo!", "ok");
+                    Tournaments.Remove(tournamentToDelete);
+                }
             }
         }
     }

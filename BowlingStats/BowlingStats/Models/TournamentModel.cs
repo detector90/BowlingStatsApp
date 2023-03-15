@@ -19,7 +19,8 @@ namespace BowlingStats.Models
         public string Description { get; set; }
         public DateTime EventDate { get; set; }
         public bool IsOfficial { get; set; }
-        
+        public Command DeleteTournamentCommand { get; set; }
+
 
         public ObservableCollection<GameModel> Games
         {
