@@ -30,33 +30,7 @@ namespace BowlingStats.Views
         async void OnBowlingCenterSelected(object sender, SelectedItemChangedEventArgs args)
         {
             var bowlingCenter = args.SelectedItem as BowlingCenterModel;
-            if (bowlingCenter == null)
-                return;
-
-            string result = await DisplayActionSheet("Cosa desideri fare?", "Annulla", null, new string[] { "- Visualizza/Modifica centro bowling", "- Cancella centro bowling" });
-
-            switch (result)
-            {
-                case "Annulla":
-                    break;
-
-                case "- Cancella centro bowling":
-                    bool deleted = await viewModel.DataStore.DeleteBowlingCenterAsync(bowlingCenter.ID);
-
-                    if (deleted)
-                    {
-                        await DisplayAlert("Cancellazione", "Cancellazione avvenuta con successo!", "ok");
-                        viewModel.LoadBowlingCentersCommand.Execute(null);
-                    }
-                    break;
-
-                case "- Visualizza/Modifica centro bowling":
-                    await Navigation.PushModalAsync(new NavigationPage(new BowlingCenterDetailPage(bowlingCenter)));
-                    break;
-
-                default:
-                    break;
-            }
+            await Navigation.PushModalAsync(new NavigationPage(new BowlingCenterDetailPage(bowlingCenter)));
         }
 
         async void AddBowlingCenter_Clicked(object sender, EventArgs e)

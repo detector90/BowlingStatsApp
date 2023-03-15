@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Forms;
 
 namespace BowlingStats.Models
 {
@@ -10,6 +11,7 @@ namespace BowlingStats.Models
         public string City { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
+        public Command DeleteBowlingCenterCommand { get; set; }
 
         public string Resume
         {

@@ -41,14 +41,16 @@
                         <ViewCell>
                             <Frame CornerRadius="10" Padding="0" Margin="5">
                                 <StackLayout>
+                                    <Grid BackgroundColor="Cyan">
                                     <Label Text="{Binding City}"
                                            TextColor="Black"
                                 LineBreakMode="NoWrap" 
                                 Style="{DynamicResource ListItemTextStyle}" 
                                 FontSize="Medium"
-                                BackgroundColor="Cyan"
                                            Padding="0,5,0,5"
                                            HorizontalTextAlignment="Center"/>
+                                    <ImageButton Source="Delete_icon2.png" BackgroundColor="Transparent" x:Name="DeleteGame" HorizontalOptions="End" Command="{Binding DeleteBowlingCenterCommand}"></ImageButton>
+                                    </Grid>
                                     <Label Text="{Binding Name}" 
                                 LineBreakMode="WordWrap"
                                 Style="{DynamicResource ListItemDetailTextStyle}"

@@ -64,6 +64,7 @@ namespace BowlingStats.ViewModels
                 var bowlingCenters = await DataStore.GetBowlingCentersAsync(true);
                 foreach (var bowlingCenter in bowlingCenters)
                 {
+                    bowlingCenter.DeleteBowlingCenterCommand = new Command(async () => await DeleteBowlingCenter(bowlingCenter));
                     BowlingCenters.Add(bowlingCenter);
                 }
             }
@@ -74,6 +75,22 @@ namespace BowlingStats.ViewModels
             finally
             {
                 IsBusy = false;
+            }
+        }
+
+        private async Task DeleteBowlingCenter(BowlingCenterModel bcToDelete)
+        {
+            bool confirm = await App.Current.MainPage.DisplayAlert("Conferma", "Sei sicuro di voler cancellare il centro bowling selezionato?", "Si", "No");
+
+            if (confirm)
+            {
+                bool deleted = await DataStore.DeleteBowlingCenterAsync(bcToDelete.ID);
+
+                if (deleted)
+                {
+                    await App.Current.MainPage.DisplayAlert("Cancellazione", "Cancellazione avvenuta con successo!", "ok");
+                    BowlingCenters.Remove(bcToDelete);
+                }
             }
         }
     }
